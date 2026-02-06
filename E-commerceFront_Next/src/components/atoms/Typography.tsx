@@ -1,0 +1,32 @@
+import React from 'react';
+
+interface TypographyProps {
+  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'body' | 'small';
+  children: React.ReactNode;
+  className?: string;
+  as?: React.ElementType;
+}
+
+export const Typography: React.FC<TypographyProps> = ({
+  variant = 'body',
+  children,
+  className = '',
+  as,
+}) => {
+  const variants = {
+    h1: 'text-5xl sm:text-7xl font-serif font-medium tracking-tight',
+    h2: 'text-3xl sm:text-5xl font-serif font-medium tracking-tight',
+    h3: 'text-xl sm:text-2xl font-serif font-medium tracking-tight',
+    h4: 'text-lg font-sans font-semibold tracking-wider uppercase',
+    body: 'text-base font-sans font-light leading-relaxed',
+    small: 'text-[10px] sm:text-xs font-sans font-medium tracking-[0.3em] uppercase',
+  };
+
+  const Component = as || (variant.startsWith('h') ? variant : variant === 'small' ? 'span' : 'p');
+
+  return (
+    <Component className={`${variants[variant]} ${className}`}>
+      {children}
+    </Component>
+  );
+};

@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Outfit", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-serif: "Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: #2563eb; /* Marketplace Blue/Indigo */
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #64748b; /* Slate Gray */
+  --color-accent: #f59e0b; /* Marketplace Amber/Orange for highlights */
+  --color-muted: #f8fafc;
+  --color-border: #e2e8f0;
+
+  --radius-lg: 8px; /* Softer corners for marketplace feel */
+  --radius-md: 6px;
+  --radius-sm: 4px;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --primary: #0f172a; /* Corporate Navy/Black */
+  --secondary: #64748b; /* Slate Gray */
+  --accent: #2563eb; /* Professional Blue */
+  --muted: #f8fafc;
+  --border: #e2e8f0;
+}
+
+/* Force light mode variables, disable .dark overrides */
+body {
+  @apply bg-background text-foreground;
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+@layer components {
+  .marketplace-shadow {
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  }
+  
+  .marketplace-shadow-lg {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+
+  .nav-item {
+    @apply text-sm font-medium text-slate-600 hover:text-primary transition-colors py-2 px-3 rounded-md hover:bg-slate-50;
+  }
+
+  .badge-vendor {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-600 border border-slate-200;
+  }
+
+  .btn-marketplace {
+    @apply inline-flex items-center justify-center px-4 py-2 font-medium transition-all focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
