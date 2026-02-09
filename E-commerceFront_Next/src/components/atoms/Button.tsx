@@ -17,11 +17,11 @@ export const Button: React.FC<ButtonProps> = ({
   variant = 'primary',
   className = '',
 }) => {
-  const baseStyles = 'inline-flex items-center justify-center px-10 py-5 text-[10px] tracking-[0.3em] uppercase font-bold transition-all duration-500 relative overflow-hidden group';
+  const baseStyles = 'inline-flex items-center justify-center px-6 sm:px-10 py-3 sm:py-5 text-[9px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.3em] uppercase font-bold transition-all duration-500 relative overflow-hidden group rounded-lg sm:rounded-xl';
   
   const variants = {
-    primary: 'bg-primary text-white border border-primary hover:bg-black hover:border-black',
-    outline: 'bg-transparent text-foreground border border-foreground/20 hover:border-foreground',
+    primary: 'bg-primary text-white border border-primary hover:opacity-90 transition-opacity',
+    outline: 'bg-transparent text-foreground border border-foreground/20 hover:border-accent hover:text-accent',
     ghost: 'bg-transparent text-foreground hover:bg-muted',
   };
 
@@ -48,3 +48,5 @@ export const Button: React.FC<ButtonProps> = ({
     </button>
   );
 };
+
+export default Button;

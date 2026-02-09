@@ -6,26 +6,38 @@
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-primary: #2563eb; /* Marketplace Blue/Indigo */
-  --color-primary-foreground: #ffffff;
-  --color-secondary: #64748b; /* Slate Gray */
-  --color-accent: #f59e0b; /* Marketplace Amber/Orange for highlights */
-  --color-muted: #f8fafc;
-  --color-border: #e2e8f0;
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--background);
+  --color-secondary: #9a9380;
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
 
-  --radius-lg: 8px; /* Softer corners for marketplace feel */
+  --radius-lg: 8px;
   --radius-md: 6px;
   --radius-sm: 4px;
 }
 
+/* Light (default) */
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
-  --primary: #0f172a; /* Corporate Navy/Black */
-  --secondary: #64748b; /* Slate Gray */
-  --accent: #2563eb; /* Professional Blue */
-  --muted: #f8fafc;
-  --border: #e2e8f0;
+  --background: #ffffff; /* blanco puro */
+  --foreground: #0a0a0a; /* negro casi puro */
+  --primary: #1a1a1a; /* negro oscuro para botones */
+  --accent: #0a0a0a; /* negro para acentos */
+  --muted: #f6f6f6; /* sutil contraste */
+  --border: #e6e6e6;
+  color-scheme: light;
+}
+
+/* Dark mode variables (applied when html has .dark) */
+.dark {
+  --background: #070707; /* negro profundo */
+  --foreground: #f7f7f7; /* blanco suave */
+  --primary: #2a2a2a; /* gris oscuro para botones con contraste */
+  --accent: #ffffff; /* blanco puro para acentos en dark */
+  --muted: #0f0f0f;
+  --border: #1a1a1a;
+  color-scheme: dark;
 }
 
 /* Force light mode variables, disable .dark overrides */
@@ -36,23 +48,36 @@ body {
 
 @layer components {
   .marketplace-shadow {
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    box-shadow: 0 2px 8px 0 rgba(42, 37, 32, 0.08), 0 1px 3px -1px rgba(42, 37, 32, 0.06);
   }
   
   .marketplace-shadow-lg {
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    box-shadow: 0 12px 24px -4px rgba(42, 37, 32, 0.12), 0 4px 8px -2px rgba(42, 37, 32, 0.08);
   }
 
   .nav-item {
-    @apply text-sm font-medium text-slate-600 hover:text-primary transition-colors py-2 px-3 rounded-md hover:bg-slate-50;
+    @apply text-sm font-medium text-foreground/60 hover:text-accent transition-colors py-2 px-3 rounded-md hover:bg-muted;
   }
 
   .badge-vendor {
-    @apply inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-600 border border-slate-200;
+    @apply inline-flex items-center px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-muted text-primary/70 border border-border;
   }
 
   .btn-marketplace {
     @apply inline-flex items-center justify-center px-4 py-2 font-medium transition-all focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .nav-link-v3 {
+    @apply text-sm font-medium text-foreground/70 hover:text-accent transition-colors relative;
+  }
+
+  .nav-link-v3::after {
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-300;
+    content: '';
+  }
+
+  .nav-link-v3:hover::after {
+    @apply w-full;
   }
 }
 

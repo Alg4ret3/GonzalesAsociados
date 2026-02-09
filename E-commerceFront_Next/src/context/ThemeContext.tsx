@@ -1,31 +1,59 @@
 'use client';
 
-import React, { createContext, useContext, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 interface ThemeContextType {
-  theme: 'light';
+  theme: 'light' | 'dark';
   toggleTheme: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-/**
- * Force Light Mode only for Marketplace aesthetic.
- */
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const applyTheme = (t: 'light' | 'dark') => {
+    if (t === 'dark') {
+      document.documentElement.classList.add('dark');
+      document.documentElement.style.colorScheme = 'dark';
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.style.colorScheme = 'light';
+    }
+  };
+
   useEffect(() => {
-    // Force light mode on document level
-    document.documentElement.classList.remove('dark');
-    document.documentElement.style.colorScheme = 'light';
-    localStorage.setItem('gonzales-theme', 'light');
+    // Determine initial theme: localStorage -> prefers-color-scheme -> default light
+    try {
+      const stored = localStorage.getItem('gonzales-theme') as 'light' | 'dark' | null;
+      if (stored === 'light' || stored === 'dark') {
+        setTheme(stored);
+        applyTheme(stored);
+        return;
+      }
+
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initial = prefersDark ? 'dark' : 'light';
+      setTheme(initial);
+      applyTheme(initial);
+    } catch (e) {
+      // Fallback: light
+      setTheme('light');
+      applyTheme('light');
+    }
   }, []);
 
+
   const toggleTheme = () => {
-    console.warn('Theme switching is disabled in Marketplace mode.');
+    const next = theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    try {
+      localStorage.setItem('gonzales-theme', next);
+    } catch (e) {}
+    applyTheme(next);
   };
 
   return (
-    <ThemeContext.Provider value={{ theme: 'light', toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

@@ -50,23 +50,23 @@ export default function ProductDetailPage() {
     <main className="min-h-screen bg-background">
       <Navbar />
       
-      <div className="pt-32 pb-24 px-6 sm:px-12 max-w-7xl mx-auto">
+      <div className="pt-16 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-24 px-3 sm:px-6 md:px-12 max-w-7xl mx-auto">
         {/* Breadcrumbs */}
-        <nav className="flex items-center gap-2 text-[9px] tracking-widest uppercase text-neutral-400 mb-16">
-          <Link href="/" className="hover:text-primary transition-colors">Inicio</Link>
-          <ChevronRight size={10} />
-          <Link href="/shop" className="hover:text-primary transition-colors">Tienda</Link>
-          <ChevronRight size={10} />
-          <span className="text-foreground tracking-widest">{PRODUCT.name}</span>
+        <nav className="flex items-center gap-1.5 sm:gap-2 text-[8px] sm:text-[9px] tracking-widest uppercase text-foreground/40 mb-8 sm:mb-12 md:mb-16">
+          <Link href="/" className="hover:text-accent transition-colors">Inicio</Link>
+          <ChevronRight size={8} className="sm:size-2.5 md:size-3" />
+          <Link href="/shop" className="hover:text-accent transition-colors">Tienda</Link>
+          <ChevronRight size={8} className="sm:size-2.5 md:size-3" />
+          <span className="text-foreground tracking-widest line-clamp-1">{PRODUCT.name}</span>
         </nav>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 md:gap-20 lg:gap-32">
           {/* Gallery Side */}
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-4 sm:gap-6 md:gap-8">
             <motion.div 
                initial={{ opacity: 0 }} 
                animate={{ opacity: 1 }} 
-               className="relative aspect-[3/4] bg-muted overflow-hidden"
+               className="relative aspect-[3/4] bg-muted overflow-hidden rounded-lg sm:rounded-xl"
             >
               <Image 
                 src={PRODUCT.images[activeImage]} 
@@ -76,13 +76,13 @@ export default function ProductDetailPage() {
                 priority
               />
             </motion.div>
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 lg:gap-6">
               {PRODUCT.images.map((img, idx) => (
                 <button 
                   key={idx}
                   onClick={() => setActiveImage(idx)}
-                  className={`relative aspect-square overflow-hidden border transition-all duration-300 ${
-                    activeImage === idx ? 'border-primary' : 'border-transparent hover:border-foreground/20'
+                  className={`relative aspect-square overflow-hidden border rounded-lg transition-all duration-300 ${
+                    activeImage === idx ? 'border-accent' : 'border-transparent hover:border-foreground/20'
                   }`}
                 >
                   <Image src={img} alt={`${PRODUCT.name} view ${idx}`} fill className="object-cover" />
@@ -92,37 +92,37 @@ export default function ProductDetailPage() {
           </div>
 
           {/* Info Side */}
-          <div className="flex flex-col gap-12">
-            <div className="flex flex-col gap-6">
-              <div className="flex items-center gap-4 text-primary">
-                <div className="flex gap-1">
-                  {[1,2,3,4,5].map(i => <Star key={i} size={12} fill="currentColor" />)}
+          <div className="flex flex-col gap-6 sm:gap-8 md:gap-10 lg:gap-12">
+            <div className="flex flex-col gap-4 sm:gap-5 md:gap-6">
+              <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3 text-accent">
+                <div className="flex gap-0.5">
+                  {[1,2,3,4,5].map(i => <Star key={i} size={10} className="sm:size-3 md:size-3.5" fill="currentColor" />)}
                 </div>
-                <Typography variant="small" className="text-[9px]">4.9 (42 Reseñas)</Typography>
+                <Typography variant="small" className="text-[8px] sm:text-[9px] md:text-[10px]">4.9 (42)</Typography>
               </div>
-              <Typography variant="small" className="text-primary font-bold">{PRODUCT.category}</Typography>
-              <Typography variant="h1" className="text-4xl sm:text-6xl">{PRODUCT.name}</Typography>
-              <Typography variant="h3" className="text-2xl font-light">${PRODUCT.price.toLocaleString()}</Typography>
+              <Typography variant="small" className="text-accent font-bold text-[9px] sm:text-xs md:text-sm">{PRODUCT.category}</Typography>
+              <Typography variant="h1" className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl">{PRODUCT.name}</Typography>
+              <Typography variant="h3" className="text-lg sm:text-2xl md:text-3xl font-light">${PRODUCT.price.toLocaleString()}</Typography>
             </div>
 
-            <Typography variant="body" className="text-secondary leading-relaxed font-light text-lg">
+            <Typography variant="body" className="text-secondary leading-relaxed font-light text-xs sm:text-sm md:text-base">
               {PRODUCT.description}
             </Typography>
 
-            <div className="flex flex-col gap-8 py-12 border-y border-border">
+            <div className="flex flex-col gap-6 sm:gap-7 md:gap-8 py-8 sm:py-10 md:py-12 border-y border-border">
               {/* Size Selection */}
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-4 sm:gap-5 md:gap-6">
                 <div className="flex justify-between items-center">
-                  <Typography variant="small">Seleccionar Talla</Typography>
-                  <button className="text-[9px] uppercase tracking-widest text-neutral-400 underline underline-offset-4">Guía de tallas</button>
+                  <Typography variant="small" className="text-[9px] sm:text-xs md:text-sm">Seleccionar Talla</Typography>
+                  <button className="text-[7px] sm:text-[8px] md:text-[9px] uppercase tracking-widest text-foreground/40 underline underline-offset-4">Guía</button>
                 </div>
-                <div className="flex gap-4">
+                <div className="flex gap-2 sm:gap-3 md:gap-4">
                   {PRODUCT.sizes.map(size => (
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}
-                      className={`w-14 h-14 flex items-center justify-center text-[10px] tracking-widest font-bold border transition-all duration-300 ${
-                        selectedSize === size ? 'bg-primary text-white border-primary' : 'border-border hover:border-foreground'
+                      className={`w-9 h-9 sm:w-11 md:w-12 lg:w-14 sm:h-11 md:h-12 lg:h-14 flex items-center justify-center text-[8px] sm:text-[9px] md:text-[10px] tracking-widest font-bold border transition-all duration-300 rounded-lg ${
+                        selectedSize === size ? 'bg-accent text-white border-accent' : 'border-border hover:border-foreground'
                       }`}
                     >
                       {size}
@@ -131,17 +131,17 @@ export default function ProductDetailPage() {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-6">
-                <Typography variant="small" className="text-neutral-400">Ref: {PRODUCT.sku}</Typography>
-                <div className="flex flex-col sm:flex-row gap-6">
+              <div className="flex flex-col gap-4 sm:gap-5 md:gap-6">
+                <Typography variant="small" className="text-foreground/40 text-[8px] sm:text-[9px] md:text-[10px]">Ref: {PRODUCT.sku}</Typography>
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-6">
                   <button 
                     onClick={handleAddToCart}
-                    className="flex-1 bg-primary text-white py-6 text-[10px] tracking-[0.4em] font-bold uppercase hover:bg-black transition-all duration-500 flex items-center justify-center gap-4 group"
+                    className="flex-1 bg-foreground text-background py-3 sm:py-4 md:py-5 lg:py-6 text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] font-bold uppercase hover:opacity-90 transition-all duration-500 flex items-center justify-center gap-2 sm:gap-3 group rounded-lg"
                   >
-                    Añadir a la bolsa <ShoppingBag size={14} className="group-hover:translate-x-1 transition-transform" />
+                    Añadir <ShoppingBag size={10} className="sm:size-3 md:size-3.5 group-hover:translate-x-1 transition-transform" />
                   </button>
-                  <button className="px-8 border border-border hover:border-red-500 hover:text-red-500 transition-all duration-500 group">
-                    <Star size={18} strokeWidth={1.5} className="group-hover:fill-current" />
+                  <button className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 lg:py-6 border border-border hover:border-accent hover:text-accent transition-all duration-500 group rounded-lg flex items-center justify-center">
+                    <Star size={14} className="sm:size-4 md:size-4.5 group-hover:fill-current" strokeWidth={1.5} />
                   </button>
                 </div>
               </div>

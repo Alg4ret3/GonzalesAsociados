@@ -7,70 +7,70 @@ import { Instagram, Facebook, Twitter, Mail, MapPin, Phone } from 'lucide-react'
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-neutral-50 dark:bg-neutral-900 border-t border-border pt-24 pb-12 px-6 sm:px-12">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-24 mb-24">
+    <footer className="bg-muted border-t border-border pt-12 sm:pt-24 pb-6 sm:pb-12 px-4 sm:px-6 md:px-12">
+      <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-12 md:gap-16 lg:gap-24 mb-12 sm:mb-24">
         {/* Brand */}
-        <div className="flex flex-col gap-8">
-          <Typography variant="h4" className="text-xl text-primary">
+        <div className="flex flex-col gap-4 sm:gap-8 col-span-2 sm:col-span-1">
+          <Typography variant="h4" className="text-base sm:text-lg md:text-xl text-primary">
             Gonzales<span className="text-foreground">Asociados</span>
           </Typography>
-          <Typography variant="body" className="text-sm leading-relaxed text-secondary italic">
-            &ldquo;Redefiniendo el lujo contemporáneo a través de la exclusividad y la artesanía impecable.&rdquo;
+          <Typography variant="body" className="text-xs sm:text-sm leading-relaxed text-secondary italic">
+            &ldquo;Redefiniendo el lujo contemporáneo.&rdquo;
           </Typography>
-          <div className="flex gap-6 text-neutral-400">
-            <Instagram size={18} strokeWidth={1.5} className="hover:text-primary cursor-pointer transition-colors" />
-            <Facebook size={18} strokeWidth={1.5} className="hover:text-primary cursor-pointer transition-colors" />
-            <Twitter size={18} strokeWidth={1.5} className="hover:text-primary cursor-pointer transition-colors" />
+          <div className="flex gap-4 sm:gap-6 text-foreground/40">
+            <Instagram size={16} className="sm:size-18 hover:text-accent cursor-pointer transition-colors" />
+            <Facebook size={16} className="sm:size-18 hover:text-accent cursor-pointer transition-colors" />
+            <Twitter size={16} className="sm:size-18 hover:text-accent cursor-pointer transition-colors" />
           </div>
         </div>
 
         {/* Links */}
-        <div className="flex flex-col gap-8">
-          <Typography variant="small">Tienda</Typography>
-          <div className="flex flex-col gap-4">
-            <Link href="/shop" className="text-xs uppercase tracking-widest hover:text-primary transition-colors">Todos los productos</Link>
-            <Link href="/collections" className="text-xs uppercase tracking-widest hover:text-primary transition-colors">Colecciones</Link>
-            <Link href="/new-arrivals" className="text-xs uppercase tracking-widest hover:text-primary transition-colors">Novedades</Link>
+        <div className="flex flex-col gap-4 sm:gap-8">
+          <Typography variant="small" className="text-[8px] sm:text-[10px]">Tienda</Typography>
+          <div className="flex flex-col gap-3 sm:gap-4">
+            <Link href="/shop" className="text-[7px] sm:text-xs uppercase tracking-widest hover:text-accent transition-colors line-clamp-1">Todos</Link>
+            <Link href="/collections" className="text-[7px] sm:text-xs uppercase tracking-widest hover:text-accent transition-colors line-clamp-1">Colecciones</Link>
+            <Link href="/new-arrivals" className="text-[7px] sm:text-xs uppercase tracking-widest hover:text-accent transition-colors line-clamp-1">Novedades</Link>
           </div>
         </div>
 
         {/* Support */}
-        <div className="flex flex-col gap-8">
-          <Typography variant="small">Soporte</Typography>
-          <div className="flex flex-col gap-4">
-            <Link href="/contact" className="text-xs uppercase tracking-widest hover:text-primary transition-colors">Contacto</Link>
-            <Link href="/faq" className="text-xs uppercase tracking-widest hover:text-primary transition-colors">Preguntas Frecuentes</Link>
-            <Link href="/returns" className="text-xs uppercase tracking-widest hover:text-primary transition-colors">Cambios y Devoluciones</Link>
+        <div className="flex flex-col gap-4 sm:gap-8">
+          <Typography variant="small" className="text-[8px] sm:text-[10px]">Soporte</Typography>
+          <div className="flex flex-col gap-3 sm:gap-4">
+            <Link href="/contact" className="text-[7px] sm:text-xs uppercase tracking-widest hover:text-accent transition-colors line-clamp-1">Contacto</Link>
+            <Link href="/faq" className="text-[7px] sm:text-xs uppercase tracking-widest hover:text-accent transition-colors line-clamp-1">FAQ</Link>
+            <Link href="/returns" className="text-[7px] sm:text-xs uppercase tracking-widest hover:text-accent transition-colors line-clamp-1">Devoluciones</Link>
           </div>
         </div>
 
         {/* Contact */}
-        <div className="flex flex-col gap-8">
-          <Typography variant="small">Contacto</Typography>
-          <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-4 text-xs tracking-widest text-secondary">
-              <Mail size={16} strokeWidth={1} />
-              hola@gonzalesasociados.com
+        <div className="flex flex-col gap-4 sm:gap-8">
+          <Typography variant="small" className="text-[8px] sm:text-[10px]">Contacto</Typography>
+          <div className="flex flex-col gap-3 sm:gap-4 text-[7px] sm:text-xs tracking-widest text-secondary">
+            <div className="flex items-start gap-2">
+              <Mail size={14} className="flex-shrink-0 mt-0.5" />
+              <span className="line-clamp-2">hola@gonzales.com</span>
             </div>
-            <div className="flex items-center gap-4 text-xs tracking-widest text-secondary">
-              <Phone size={16} strokeWidth={1} />
-              +57 (300) 123 4567
+            <div className="flex items-start gap-2">
+              <Phone size={14} className="flex-shrink-0 mt-0.5" />
+              <span>+57 300 1234567</span>
             </div>
-            <div className="flex items-center gap-4 text-xs tracking-widest text-secondary">
-              <MapPin size={16} strokeWidth={1} />
-              Pasto, Nariño, Colombia
+            <div className="flex items-start gap-2">
+              <MapPin size={14} className="flex-shrink-0 mt-0.5" />
+              <span>Pasto, Nariño</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto pt-12 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-8">
-        <p className="text-[10px] tracking-[0.2em] uppercase text-neutral-500">
+      <div className="max-w-7xl mx-auto pt-6 sm:pt-12 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-8">
+        <p className="text-[7px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-foreground/40 text-center sm:text-left">
           © 2026 GonzalesAsociados. Todos los derechos reservados.
         </p>
-        <div className="flex gap-8 text-[10px] tracking-[0.2em] uppercase text-neutral-500">
-          <Link href="/privacy" className="hover:text-foreground">Privacidad</Link>
-          <Link href="/terms" className="hover:text-foreground">Términos</Link>
+        <div className="flex gap-4 sm:gap-8 text-[7px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-foreground/40">
+          <Link href="/privacy" className="hover:text-foreground whitespace-nowrap">Privacidad</Link>
+          <Link href="/terms" className="hover:text-foreground whitespace-nowrap">Términos</Link>
         </div>
       </div>
     </footer>

@@ -18,7 +18,7 @@ export default function ContactPage() {
           {/* Contact Info */}
           <div className="space-y-16">
             <div className="space-y-6">
-              <Typography variant="small" className="text-primary font-bold">Contacto</Typography>
+              <Typography variant="small" className="text-foreground font-bold">Contacto</Typography>
               <Typography variant="h1" className="text-5xl sm:text-7xl">Estamos para <br /> servirte</Typography>
               <Typography variant="body" className="text-secondary text-lg font-light leading-relaxed">
                 ¿Tienes alguna duda sobre nuestras colecciones o necesitas un servicio personalizado? Nuestro equipo de conserjería está listo para atenderte.

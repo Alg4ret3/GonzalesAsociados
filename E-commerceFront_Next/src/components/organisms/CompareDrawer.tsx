@@ -14,51 +14,54 @@ export const CompareDrawer: React.FC = () => {
   if (compareItems.length === 0) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-[60] p-4 sm:p-6 pointer-events-none font-sans">
+    <div className="fixed bottom-0 left-0 right-0 z-[60] p-2 sm:p-4 md:p-6 pointer-events-none font-sans">
       <motion.div
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="max-w-4xl mx-auto bg-white border border-slate-200 shadow-2xl rounded-2xl p-4 flex flex-col sm:flex-row items-center gap-6 pointer-events-auto"
+        className="max-w-4xl mx-auto bg-background border border-border shadow-[0_12px_24px_-4px_rgba(42,37,32,0.12)] rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 flex flex-col sm:flex-row items-center gap-2 sm:gap-3 md:gap-6 pointer-events-auto"
       >
-        <div className="flex items-center gap-4 border-r border-slate-100 pr-6 mr-2 hidden md:flex">
-          <div className="w-10 h-10 bg-accent/10 text-accent rounded-full flex items-center justify-center">
-             <ArrowLeftRight size={20} />
+        <div className="flex items-center gap-2 sm:gap-3 border-r border-border pr-2 sm:pr-3 md:pr-6 mr-0 sm:mr-2 hidden sm:flex">
+          <div className="w-8 sm:w-9 md:w-10 h-8 sm:h-9 md:h-10 bg-accent/10 text-accent rounded-full flex items-center justify-center flex-shrink-0">
+             <ArrowLeftRight size={16} className="sm:size-4 md:size-5" />
           </div>
-          <div>
-            <Typography variant="h4" className="text-[11px] font-bold text-slate-900">Comparar Productos</Typography>
-            <Typography variant="small" className="text-[9px] text-slate-400">{compareItems.length} seleccionados</Typography>
+          <div className="hidden md:block">
+            <Typography variant="h4" className="text-[10px] md:text-[11px] font-bold text-foreground">Comparar</Typography>
+            <Typography variant="small" className="text-[8px] md:text-[9px] text-foreground/40">{compareItems.length} items</Typography>
+          </div>
+          <div className="md:hidden">
+            <Typography variant="small" className="text-[8px] text-foreground/40">{compareItems.length}</Typography>
           </div>
         </div>
 
-        <div className="flex-1 flex gap-3 overflow-x-auto no-scrollbar py-1">
+        <div className="flex-1 flex gap-1.5 sm:gap-2 md:gap-3 overflow-x-auto no-scrollbar py-0.5 sm:py-1 min-w-0">
           {compareItems.map(item => (
-            <div key={item.id} className="relative w-14 h-14 flex-shrink-0 bg-slate-50 rounded-lg border border-slate-100 group">
+            <div key={item.id} className="relative w-10 h-10 sm:w-12 md:w-14 sm:h-12 md:h-14 flex-shrink-0 bg-muted rounded-lg border border-border group">
                <Image src={item.image} alt={item.name} fill className="object-cover rounded-lg" />
                <button 
                  onClick={() => removeFromCompare(item.id)}
-                 className="absolute -top-2 -right-2 bg-white text-slate-400 hover:text-red-500 shadow-sm border border-slate-100 rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+                 className="absolute -top-1 sm:-top-1.5 md:-top-2 -right-1 sm:-right-1.5 md:-right-2 bg-background text-foreground/40 hover:text-accent shadow-sm border border-border rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
                >
-                 <X size={10} />
+                 <X size={8} className="sm:size-2.5 md:size-3" />
                </button>
             </div>
           ))}
           {[...Array(4 - compareItems.length)].map((_, i) => (
-            <div key={i} className="w-14 h-14 border-2 border-dashed border-slate-100 rounded-lg flex items-center justify-center text-slate-200">
-               <span className="text-[20px]">+</span>
+            <div key={i} className="w-10 h-10 sm:w-12 md:w-14 sm:h-12 md:h-14 border-2 border-dashed border-border rounded-lg flex items-center justify-center text-foreground/20 flex-shrink-0">
+               <span className="text-base sm:text-lg md:text-xl">+</span>
             </div>
           ))}
         </div>
 
-        <div className="flex items-center gap-4 pl-4 border-l border-slate-100">
+        <div className="flex items-center gap-1.5 sm:gap-2 md:gap-4 pl-2 sm:pl-3 md:pl-4 border-l border-border ml-auto">
           <button 
             onClick={clearCompare}
-            className="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-red-500"
+            className="text-[7px] sm:text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-foreground/40 hover:text-accent whitespace-nowrap"
           >
             Limpiar
           </button>
           <Link href="/compare">
-            <button className="bg-slate-900 text-white px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-slate-800 transition-all">
-               Comparar Ahora <ChevronRight size={14} />
+            <button className="bg-foreground text-background px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 md:py-2.5 rounded-full text-[7px] sm:text-[8px] md:text-[10px] font-bold uppercase tracking-widest flex items-center gap-1 hover:opacity-90 transition-all flex-shrink-0">
+               Comparar <ChevronRight size={10} className="sm:size-2.5 md:size-3.5" />
             </button>
           </Link>
         </div>

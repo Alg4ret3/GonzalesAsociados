@@ -22,7 +22,10 @@ const PRODUCTS = [
     slug: "leggins-pro-compression",
     vendor: "Babalu.co",
     rating: 4.9,
-    isWholesale: true
+    isWholesale: true,
+    color: "Negro",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    productType: "Pantalones"
   },
   {
     id: "i1",
@@ -32,7 +35,10 @@ const PRODUCTS = [
     category: "Trends",
     slug: "informe-tendencias-2026",
     vendor: "Inexmoda",
-    rating: 5.0
+    rating: 5.0,
+    color: "Multicolor",
+    sizes: ["Único"],
+    productType: "Libros"
   },
   {
     id: "1",
@@ -42,7 +48,10 @@ const PRODUCTS = [
     category: "Alta Costura",
     slug: "gabardina-velvet-imperial",
     vendor: "Atelier Paris",
-    rating: 4.9
+    rating: 4.9,
+    color: "Gris",
+    sizes: ["34", "36", "38", "40", "42"],
+    productType: "Abrigos"
   },
   {
     id: "2",
@@ -52,7 +61,10 @@ const PRODUCTS = [
     category: "Gala",
     slug: "vestido-seda-medianoche",
     vendor: "Luxe Couture",
-    rating: 5.0
+    rating: 5.0,
+    color: "Negro",
+    sizes: ["34", "36", "38", "40"],
+    productType: "Vestidos"
   },
   {
     id: "3",
@@ -62,7 +74,10 @@ const PRODUCTS = [
     category: "Verano",
     slug: "conjunto-lino-arena",
     vendor: "Nativa Design",
-    rating: 4.7
+    rating: 4.7,
+    color: "Beige",
+    sizes: ["XS", "S", "M", "L"],
+    productType: "Conjuntos"
   },
   {
     id: "4",
@@ -72,7 +87,10 @@ const PRODUCTS = [
     category: "Sastrería",
     slug: "blazer-noir-premium",
     vendor: "Atelier Paris",
-    rating: 4.8
+    rating: 4.8,
+    color: "Negro",
+    sizes: ["36", "38", "40", "42", "44"],
+    productType: "Blazers"
   },
   {
     id: "5",
@@ -82,66 +100,156 @@ const PRODUCTS = [
     category: "Sastrería",
     slug: "pantalon-sastre-gris",
     vendor: "Studio 10",
-    rating: 4.5
+    rating: 4.5,
+    color: "Gris",
+    sizes: ["34", "36", "38", "40", "42", "44"],
+    productType: "Pantalones"
   }
 ];
 
 const CATEGORIES = ["Todos", "Activewear", "Trends", "Alta Costura", "Gala", "Verano", "Sastrería", "Accesorios"];
 const VENDORS = ["Babalu.co", "Inexmoda", "Atelier Paris", "Luxe Couture", "Nativa Design"];
+const COLORS = ["Negro", "Blanco", "Gris", "Beige", "Azul", "Rojo", "Multicolor"];
+const SIZES = ["XS", "S", "M", "L", "XL", "34", "36", "38", "40", "42", "44"];
+const PRODUCT_TYPES = ["Pantalones", "Vestidos", "Blazers", "Abrigos", "Conjuntos", "Libros", "Accesorios"];
 
 interface FiltersContentProps {
   selectedCategory: string;
   setSelectedCategory: (cat: string) => void;
+  selectedColor: string;
+  setSelectedColor: (color: string) => void;
+  selectedSize: string;
+  setSelectedSize: (size: string) => void;
+  selectedType: string;
+  setSelectedType: (type: string) => void;
+  priceRange: [number, number];
+  setPriceRange: (range: [number, number]) => void;
   onFilterApplied?: () => void;
 }
 
-const FiltersContent: React.FC<FiltersContentProps> = ({ selectedCategory, setSelectedCategory, onFilterApplied }) => (
+const FiltersContent: React.FC<FiltersContentProps> = ({ 
+  selectedCategory, setSelectedCategory,
+  selectedColor, setSelectedColor,
+  selectedSize, setSelectedSize,
+  selectedType, setSelectedType,
+  priceRange, setPriceRange,
+  onFilterApplied 
+}) => (
   <div className="space-y-10 group">
     <div className="flex items-center justify-between">
        <Typography variant="h4" className="text-sm font-extrabold flex items-center gap-2">
-         <SlidersHorizontal size={16} /> Filtros Corporativos
+         <SlidersHorizontal size={16} /> Filtros
        </Typography>
-       <button onClick={() => setSelectedCategory('Todos')} className="text-[10px] text-blue-600 font-bold uppercase hover:underline">Limpiar</button>
+       <button 
+         onClick={() => { 
+           setSelectedCategory('Todos');
+           setSelectedColor('Todos');
+           setSelectedSize('Todos');
+           setSelectedType('Todos');
+           setPriceRange([0, 2000000]);
+         }} 
+         className="text-[10px] text-accent font-bold uppercase hover:underline"
+       >
+         Limpiar
+       </button>
     </div>
 
+    {/* Tipos de Producto */}
     <div className="space-y-6">
-      <Typography variant="small" className="text-[10px] font-bold text-slate-900 uppercase tracking-[0.2em]">Departamentos</Typography>
+      <Typography variant="small" className="text-[10px] font-bold text-foreground uppercase tracking-[0.2em]">Tipo de Producto</Typography>
+      <div className="flex flex-col gap-3">
+        {["Todos", ...PRODUCT_TYPES].map(type => (
+          <button 
+            key={type} 
+            onClick={() => { setSelectedType(type); onFilterApplied?.(); }}
+            className={`text-sm flex justify-between items-center transition-colors py-1 ${
+              selectedType === type ? 'text-accent font-extrabold' : 'text-foreground/50 hover:text-foreground'
+            }`}
+          >
+            {type}
+            <span className="text-[9px] bg-muted text-foreground/40 px-2 py-0.5 rounded-full font-bold">8</span>
+          </button>
+        ))}
+      </div>
+    </div>
+
+    {/* Colores */}
+    <div className="space-y-6 pt-6 border-t border-border">
+      <Typography variant="small" className="text-[10px] font-bold text-foreground uppercase tracking-[0.2em]">Color</Typography>
+      <div className="flex flex-wrap gap-2">
+        {["Todos", ...COLORS].map(color => (
+          <button 
+            key={color} 
+            onClick={() => { setSelectedColor(color); onFilterApplied?.(); }}
+            className={`text-[9px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full transition-all ${
+              selectedColor === color 
+                ? 'bg-accent text-background' 
+                : 'bg-muted text-foreground/60 hover:bg-muted/80'
+            }`}
+          >
+            {color}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    {/* Rango de Precio */}
+    <div className="space-y-6 pt-6 border-t border-border">
+      <Typography variant="small" className="text-[10px] font-bold text-foreground uppercase tracking-[0.2em]">Rango de Precio</Typography>
+      <div className="space-y-4">
+         <div className="space-y-2">
+           <input 
+             type="range" 
+             min="0" 
+             max="2000000" 
+             value={priceRange[1]}
+             onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
+             className="w-full h-1 bg-muted rounded-lg appearance-none cursor-pointer accent-accent" 
+           />
+           <div className="flex justify-between text-[9px] font-bold text-foreground bg-muted px-3 py-2 rounded-lg">
+              <span>${priceRange[0].toLocaleString()}</span>
+              <span>${priceRange[1].toLocaleString()}</span>
+           </div>
+         </div>
+      </div>
+    </div>
+
+    {/* Tallas */}
+    <div className="space-y-6 pt-6 border-t border-border">
+      <Typography variant="small" className="text-[10px] font-bold text-foreground uppercase tracking-[0.2em]">Talla</Typography>
+      <div className="flex flex-wrap gap-2">
+        {["Todos", ...SIZES].map(size => (
+          <button 
+            key={size} 
+            onClick={() => { setSelectedSize(size); onFilterApplied?.(); }}
+            className={`text-[9px] font-bold uppercase tracking-wider w-10 h-10 rounded-lg transition-all flex items-center justify-center ${
+              selectedSize === size 
+                ? 'bg-accent text-background' 
+                : 'bg-muted text-foreground/60 hover:bg-muted/80 border border-border'
+            }`}
+          >
+            {size}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    {/* Departamentos */}
+    <div className="space-y-6 pt-6 border-t border-border">
+      <Typography variant="small" className="text-[10px] font-bold text-foreground uppercase tracking-[0.2em]">Departamentos</Typography>
       <div className="flex flex-col gap-3">
         {CATEGORIES.map(cat => (
           <button 
             key={cat} 
             onClick={() => { setSelectedCategory(cat); onFilterApplied?.(); }}
             className={`text-sm flex justify-between items-center transition-colors py-1 ${
-              selectedCategory === cat ? 'text-blue-600 font-extrabold' : 'text-slate-500 hover:text-slate-900'
+              selectedCategory === cat ? 'text-accent font-extrabold' : 'text-foreground/50 hover:text-foreground'
             }`}
           >
             {cat}
-            <span className="text-[9px] bg-slate-100 text-slate-400 px-2 py-0.5 rounded-full font-bold">12</span>
+            <span className="text-[9px] bg-muted text-foreground/40 px-2 py-0.5 rounded-full font-bold">12</span>
           </button>
         ))}
-      </div>
-    </div>
-
-    <div className="space-y-6 pt-6 border-t border-slate-100">
-      <Typography variant="small" className="text-[10px] font-bold text-slate-900 uppercase tracking-[0.2em]">Rango de Precio</Typography>
-      <div className="space-y-4">
-         <input type="range" className="w-full h-1 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-blue-600" />
-         <div className="flex justify-between text-[10px] font-bold text-slate-400 uppercase">
-            <span>$0</span>
-            <span>$2.000.000+</span>
-         </div>
-      </div>
-    </div>
-
-    <div className="space-y-6 pt-6 border-t border-slate-100">
-      <Typography variant="small" className="text-[10px] font-bold text-slate-900 uppercase tracking-[0.2em]">Aliados Industriales</Typography>
-      <div className="flex flex-col gap-3">
-         {VENDORS.map(vendor => (
-           <label key={vendor} className="flex items-center gap-3 text-sm text-slate-600 cursor-pointer hover:text-blue-600 transition-colors">
-              <input type="checkbox" className="w-4 h-4 rounded border-slate-200 text-blue-600 focus:ring-blue-600" />
-               {vendor}
-           </label>
-         ))}
       </div>
     </div>
   </div>
@@ -154,73 +262,98 @@ function ShopContent() {
   const categoryParam = searchParams.get('category');
 
   const [selectedCategory, setSelectedCategory] = useState(categoryParam || "Todos");
+  const [selectedColor, setSelectedColor] = useState("Todos");
+  const [selectedSize, setSelectedSize] = useState("Todos");
+  const [selectedType, setSelectedType] = useState("Todos");
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 2000000]);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
 
-  // Corporate Filter Logic
+  // Filter Logic
   const filteredProducts = PRODUCTS.filter(p => {
     // Category Filter
     if (selectedCategory !== "Todos" && p.category !== selectedCategory) return false;
     
+    // Color Filter
+    if (selectedColor !== "Todos" && p.color !== selectedColor) return false;
+
+    // Size Filter
+    if (selectedSize !== "Todos" && !p.sizes.includes(selectedSize)) return false;
+
+    // Product Type Filter
+    if (selectedType !== "Todos" && p.productType !== selectedType) return false;
+
+    // Price Range Filter
+    if (p.price < priceRange[0] || p.price > priceRange[1]) return false;
+    
     // Vendor Filter
     if (vendorParam && p.vendor !== vendorParam) return false;
 
-    // Filter Badges (New, Wholesale, Outlet)
+    // Filter Badges
     if (filterParam === 'wholesale' && !p.isWholesale) return false;
-    // Note: Add 'isOutlet' or 'isNew' to mock data later if needed, 
-    // for now we'll just filter what we have.
     
     return true;
   });
 
   return (
-    <main className="min-h-screen bg-slate-50 font-sans selection:bg-blue-100">
+    <main className="min-h-screen bg-background font-sans selection:bg-accent/20">
       <Navbar />
       
-      <div className="pt-32 sm:pt-48 pb-16 sm:pb-24 px-4 sm:px-12 max-w-[1400px] mx-auto">
-        <header className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
-          <nav className="flex items-center gap-2 text-[9px] sm:text-[10px] tracking-widest uppercase text-slate-400 font-bold">
-            <Link href="/" className="hover:text-blue-600 transition-colors">Inicio</Link>
-            <ChevronRight size={10} />
-            <span className="text-slate-900">Catálogo Corporativo</span>
+      <div className="pt-16 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-24 px-3 sm:px-6 md:px-12 max-w-[1400px] mx-auto">
+        <header className="mb-6 sm:mb-8 md:mb-12 space-y-2 sm:space-y-3 md:space-y-4">
+          <nav className="flex items-center gap-1.5 sm:gap-2 text-[8px] sm:text-[9px] md:text-[10px] tracking-widest uppercase text-foreground/40 font-bold">
+            <Link href="/" className="hover:text-accent transition-colors">Inicio</Link>
+            <ChevronRight size={8} className="sm:size-2.5 md:size-3" />
+            <span className="text-foreground">Catálogo</span>
             {(vendorParam || filterParam) && (
               <>
-                <ChevronRight size={10} />
-                <span className="text-blue-600">{vendorParam || filterParam}</span>
+                <ChevronRight size={8} className="sm:size-2.5 md:size-3" />
+                <span className="text-accent line-clamp-1">{vendorParam || filterParam}</span>
               </>
             )}
           </nav>
           
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 sm:gap-6 border-b border-slate-100 pb-10">
-            <div className="space-y-2">
-               <Typography variant="h2" className="text-4xl font-black text-slate-950 tracking-tighter">Explorar Portafolio</Typography>
-               <Typography variant="body" className="text-sm text-slate-500 font-light">Acceso directo a referencias industriales y colecciones de autor.</Typography>
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 sm:gap-4 md:gap-6 border-b border-border pb-6 sm:pb-8 md:pb-10">
+            <div className="space-y-1 sm:space-y-1.5 md:space-y-2">
+               <Typography variant="h2" className="text-2xl sm:text-3xl md:text-4xl font-black text-foreground tracking-tighter">Explorar</Typography>
+               <Typography variant="body" className="text-[10px] sm:text-xs md:text-sm text-foreground/60 font-light">Colecciones de autor y referencias.</Typography>
             </div>
-            <Typography variant="body" className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{filteredProducts.length} Referencias Disponibles</Typography>
+            <Typography variant="body" className="text-[8px] sm:text-[9px] md:text-[10px] font-bold text-foreground/40 uppercase tracking-widest whitespace-nowrap">{filteredProducts.length} Referencias</Typography>
           </div>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
           {/* Filters Sidebar - Desktop */}
           <aside className="hidden lg:block lg:col-span-3">
-             <div className="bg-white p-10 rounded-[32px] border border-slate-100 shadow-sm sticky top-48">
-                <FiltersContent selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
+             <div className="bg-background p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl md:rounded-[32px] border border-border shadow-sm sticky top-24 sm:top-32 md:top-48">
+                <FiltersContent 
+                  selectedCategory={selectedCategory} 
+                  setSelectedCategory={setSelectedCategory}
+                  selectedColor={selectedColor}
+                  setSelectedColor={setSelectedColor}
+                  selectedSize={selectedSize}
+                  setSelectedSize={setSelectedSize}
+                  selectedType={selectedType}
+                  setSelectedType={setSelectedType}
+                  priceRange={priceRange}
+                  setPriceRange={setPriceRange}
+                />
              </div>
           </aside>
 
           {/* Product Feed */}
-          <section className="lg:col-span-9 space-y-8">
+          <section className="lg:col-span-9 space-y-4 sm:space-y-6 md:space-y-8">
             {/* Toolbar */}
-            <div className="bg-white p-4 rounded-2xl border border-slate-100 flex items-center justify-between shadow-sm">
-               <div className="flex gap-3">
+            <div className="bg-white p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl md:rounded-2xl border border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4 shadow-sm">
+               <div className="flex gap-1.5 sm:gap-2 md:gap-3 w-full sm:w-auto flex-wrap">
                   <button 
                     onClick={() => setIsFilterDrawerOpen(true)}
-                    className="lg:hidden flex items-center gap-2 bg-slate-900 text-white px-5 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest shadow-lg"
+                    className="lg:hidden flex items-center gap-1.5 sm:gap-2 bg-primary text-white px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3 rounded-lg sm:rounded-xl text-[8px] sm:text-[9px] md:text-[10px] font-bold uppercase tracking-widest shadow-lg"
                   >
-                    <SlidersHorizontal size={14} /> Filtrar
+                    <SlidersHorizontal size={12} className="sm:size-3.5 md:size-3.5" /> Filtrar
                   </button>
                   
-                  <select className="bg-slate-50 border-none rounded-xl text-[10px] font-bold text-slate-600 px-5 py-3 outline-none focus:ring-2 focus:ring-blue-600/10 cursor-pointer">
+                  <select className="text-xs bg-muted border-none rounded-lg sm:rounded-xl text-[9px] sm:text-[10px] font-bold text-foreground/60 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3 outline-none focus:ring-2 focus:ring-accent/10 cursor-pointer">
                      <option>Ordenar por: Relevancia</option>
                      <option>Precio: Menor a Mayor</option>
                      <option>Precio: Mayor a Menor</option>
@@ -228,24 +361,24 @@ function ShopContent() {
                   </select>
                </div>
                
-               <div className="hidden xs:flex items-center gap-2 border-l border-slate-100 pl-6">
+               <div className="hidden xs:flex items-center gap-1 sm:gap-2 border-l border-slate-100 pl-3 sm:pl-4 md:pl-6">
                   <button 
                     onClick={() => setViewMode('grid')}
-                    className={`p-2.5 rounded-xl transition-all ${viewMode === 'grid' ? 'bg-slate-950 text-white shadow-xl' : 'text-slate-400 hover:bg-slate-50'}`}
+                    className={`p-1.5 sm:p-2 md:p-2.5 rounded-lg sm:rounded-xl transition-all ${viewMode === 'grid' ? 'bg-slate-950 text-white shadow-xl' : 'text-slate-400 hover:bg-slate-50'}`}
                   >
-                    <LayoutGrid size={18} />
+                    <LayoutGrid size={14} className="sm:size-4 md:size-4.5" />
                   </button>
                   <button 
                     onClick={() => setViewMode('list')}
-                    className={`p-2.5 rounded-xl transition-all ${viewMode === 'list' ? 'bg-slate-950 text-white shadow-xl' : 'text-slate-400 hover:bg-slate-50'}`}
+                    className={`p-1.5 sm:p-2 md:p-2.5 rounded-lg sm:rounded-xl transition-all ${viewMode === 'list' ? 'bg-slate-950 text-white shadow-xl' : 'text-slate-400 hover:bg-slate-50'}`}
                   >
-                    <List size={18} />
+                    <List size={14} className="sm:size-4 md:size-4.5" />
                   </button>
                </div>
             </div>
 
             {/* Product Grid */}
-            <div className={`grid gap-8 ${viewMode === 'grid' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
+            <div className={`grid gap-3 sm:gap-4 md:gap-6 lg:gap-8 ${viewMode === 'grid' ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-3' : 'grid-cols-1'}`}>
               {filteredProducts.map((product) => (
                 <ProductCard key={product.id} {...product} />
               ))}
@@ -270,7 +403,7 @@ function ShopContent() {
                animate={{ opacity: 0.5 }}
                exit={{ opacity: 0 }}
                onClick={() => setIsFilterDrawerOpen(false)}
-               className="fixed inset-0 bg-slate-900 z-[80]"
+               className="fixed inset-0 bg-foreground/30 z-[80]"
             />
             <motion.div
                initial={{ y: '100%' }}
@@ -286,7 +419,19 @@ function ShopContent() {
                   </button>
                </div>
                <div className="flex-1 overflow-y-auto p-10 pt-6 no-scrollbar">
-                  <FiltersContent selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} onFilterApplied={() => setIsFilterDrawerOpen(false)} />
+                  <FiltersContent 
+                    selectedCategory={selectedCategory} 
+                    setSelectedCategory={setSelectedCategory}
+                    selectedColor={selectedColor}
+                    setSelectedColor={setSelectedColor}
+                    selectedSize={selectedSize}
+                    setSelectedSize={setSelectedSize}
+                    selectedType={selectedType}
+                    setSelectedType={setSelectedType}
+                    priceRange={priceRange}
+                    setPriceRange={setPriceRange}
+                    onFilterApplied={() => setIsFilterDrawerOpen(false)}
+                  />
                </div>
                <div className="p-10 bg-slate-50 border-t border-slate-100 flex gap-4">
                   <Button label={`Mostrar Resultados`} onClick={() => setIsFilterDrawerOpen(false)} variant="primary" className="flex-1 rounded-2xl py-5 bg-slate-950" />

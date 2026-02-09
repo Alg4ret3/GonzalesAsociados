@@ -12,7 +12,7 @@ export interface CartItem {
   color?: string;
   slug: string;
   category: string;
-  vendor: string;
+  vendor?: string;
 }
 
 interface CartContextType {

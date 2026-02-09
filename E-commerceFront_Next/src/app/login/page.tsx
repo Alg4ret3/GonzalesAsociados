@@ -27,7 +27,7 @@ export default function LoginPage() {
       <div className="flex-1 flex items-center justify-center pt-32 pb-24 px-6 sm:px-12">
         <div className="w-full max-w-md space-y-12">
           <div className="text-center space-y-4">
-            <Typography variant="small" className="text-primary font-bold">Bienvenido</Typography>
+            <Typography variant="small" className="text-accent font-bold">Bienvenido</Typography>
             <Typography variant="h2" className="text-4xl">Ingresar</Typography>
           </div>
 
@@ -42,7 +42,7 @@ export default function LoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-                <Mail className="absolute right-0 top-4 text-neutral-300 group-focus-within:text-primary transition-colors" size={16} />
+                <Mail className="absolute right-0 top-4 text-foreground/30 group-focus-within:text-accent transition-colors" size={16} />
               </div>
 
               <div className="relative group">
@@ -54,7 +54,7 @@ export default function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
-                <Lock className="absolute right-0 top-4 text-neutral-300 group-focus-within:text-primary transition-colors" size={16} />
+                <Lock className="absolute right-0 top-4 text-foreground/30 group-focus-within:text-accent transition-colors" size={16} />
               </div>
             </div>
 

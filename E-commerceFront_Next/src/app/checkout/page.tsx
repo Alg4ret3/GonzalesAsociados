@@ -10,10 +10,10 @@ import { ShieldCheck, Lock, Truck, CreditCard, ChevronRight, Building2 } from 'l
 import Image from 'next/image';
 
 export default function CheckoutPage() {
-  const { cart, totalPrice } = useCart();
+  const { cart = [], totalPrice = 0 } = useCart() || {};
 
   // Group items by vendor for corporate multi-vendor structure
-  const itemsByVendor = cart.reduce((acc, item) => {
+  const itemsByVendor = (cart || []).reduce((acc, item) => {
     const vendor = item.vendor || 'Gonzales Market';
     if (!acc[vendor]) acc[vendor] = [];
     acc[vendor].push(item);
@@ -24,60 +24,60 @@ export default function CheckoutPage() {
   const grandTotal = totalPrice + shippingCost;
 
   return (
-    <main className="min-h-screen bg-slate-50 font-sans selection:bg-blue-100">
+    <main className="min-h-screen bg-background font-sans selection:bg-accent/20">
       <Navbar />
 
-      <div className="pt-32 sm:pt-48 pb-24 px-6 sm:px-12 max-w-[1400px] mx-auto">
-        <header className="mb-16 border-b border-slate-200 pb-12">
-          <Typography variant="h1" className="text-5xl font-black text-slate-950 tracking-tighter uppercase">Pasarela Corporativa</Typography>
-          <div className="flex items-center gap-3 mt-4">
-             <div className="flex items-center gap-2 bg-slate-900 text-white px-3 py-1 rounded text-[9px] font-bold uppercase tracking-widest">
-                <Lock size={12} /> Conexión Encriptada SSL
+      <div className="pt-16 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-24 px-3 sm:px-6 md:px-12 max-w-[1400px] mx-auto">
+        <header className="mb-8 sm:mb-12 md:mb-16 border-b border-border pb-8 sm:pb-10 md:pb-12">
+          <Typography variant="h1" className="text-2xl sm:text-4xl md:text-5xl font-black text-foreground tracking-tighter uppercase">Pasarela</Typography>
+          <div className="flex items-center gap-2 sm:gap-3 mt-2 sm:mt-4 flex-wrap">
+             <div className="flex items-center gap-1.5 sm:gap-2 bg-primary text-white px-2 sm:px-3 py-1 rounded-lg text-[7px] sm:text-[8px] md:text-[9px] font-bold uppercase tracking-widest">
+                <Lock size={10} className="sm:size-3 md:size-3.5" /> Encriptada SSL
              </div>
-             <Typography variant="small" className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Transacción Industrial Segura</Typography>
+             <Typography variant="small" className="text-[7px] sm:text-[8px] md:text-[10px] font-bold text-foreground/40 uppercase tracking-widest">Transacción Segura</Typography>
           </div>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 md:gap-12 lg:gap-16">
           {/* Main Checkout Form */}
-          <div className="lg:col-span-8 space-y-12">
+          <div className="lg:col-span-8 space-y-6 sm:space-y-8 md:space-y-12">
             
             {/* Step 1: Industrial Shipping */}
-            <section className="bg-white p-10 rounded-[40px] border border-slate-100 shadow-sm space-y-10">
-               <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-950 border border-slate-200"><Truck size={24} /></div>
-                  <Typography variant="h3" className="text-xl font-bold uppercase tracking-tight">1. Logística y Despacho</Typography>
+            <section className="bg-background p-4 sm:p-6 md:p-8 lg:p-10 rounded-2xl sm:rounded-3xl lg:rounded-[40px] border border-border shadow-sm space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10">
+               <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
+                  <div className="w-10 h-10 sm:w-11 md:w-12 lg:w-12 bg-muted rounded-lg sm:rounded-xl lg:rounded-2xl flex items-center justify-center text-foreground border border-border flex-shrink-0"><Truck size={18} className="sm:size-5 md:size-6" /></div>
+                  <Typography variant="h3" className="text-sm sm:text-base md:text-lg lg:text-xl font-bold uppercase tracking-tight">1. Logística</Typography>
                </div>
-               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                  <div className="space-y-2">
-                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Nombre Corporativo / Responsable</label>
-                     <input type="text" className="w-full bg-slate-50 border border-slate-100 rounded-xl p-4 text-sm font-bold focus:ring-2 focus:ring-blue-600/10 outline-none" />
+               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
+                  <div className="space-y-1.5 sm:space-y-2">
+                     <label className="text-[7px] sm:text-[8px] md:text-[9px] lg:text-[10px] font-bold text-foreground/40 uppercase tracking-widest ml-1">Nombre</label>
+                     <input type="text" className="w-full bg-muted border border-border rounded-lg sm:rounded-xl text-[11px] sm:text-xs md:text-sm px-3 sm:px-4 py-2 sm:py-3 md:py-4 font-bold focus:ring-2 focus:ring-accent/10 outline-none" />
                   </div>
-                  <div className="space-y-2">
-                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Email de Contacto</label>
-                     <input type="email" className="w-full bg-slate-50 border border-slate-100 rounded-xl p-4 text-sm font-bold focus:ring-2 focus:ring-blue-600/10 outline-none" />
+                  <div className="space-y-1.5 sm:space-y-2">
+                     <label className="text-[7px] sm:text-[8px] md:text-[9px] lg:text-[10px] font-bold text-foreground/40 uppercase tracking-widest ml-1">Email</label>
+                     <input type="email" className="w-full bg-muted border border-border rounded-lg sm:rounded-xl text-[11px] sm:text-xs md:text-sm px-3 sm:px-4 py-2 sm:py-3 md:py-4 font-bold focus:ring-2 focus:ring-accent/10 outline-none" />
                   </div>
-                  <div className="sm:col-span-2 space-y-2">
-                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Dirección de Entrega Industrial</label>
-                     <input type="text" className="w-full bg-slate-50 border border-slate-100 rounded-xl p-4 text-sm font-bold focus:ring-2 focus:ring-blue-600/10 outline-none" />
+                  <div className="sm:col-span-2 space-y-1.5 sm:space-y-2">
+                     <label className="text-[7px] sm:text-[8px] md:text-[9px] lg:text-[10px] font-bold text-foreground/40 uppercase tracking-widest ml-1">Dirección</label>
+                     <input type="text" className="w-full bg-muted border border-border rounded-lg sm:rounded-xl text-[11px] sm:text-xs md:text-sm px-3 sm:px-4 py-2 sm:py-3 md:py-4 font-bold focus:ring-2 focus:ring-accent/10 outline-none" />
                   </div>
                </div>
             </section>
 
             {/* Step 2: Payment Protocol */}
-            <section className="bg-white p-10 rounded-[40px] border border-slate-100 shadow-sm space-y-10">
-               <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-950 border border-slate-200"><CreditCard size={24} /></div>
-                  <Typography variant="h3" className="text-xl font-bold uppercase tracking-tight">2. Protocolo de Pago</Typography>
+            <section className="bg-white p-4 sm:p-6 md:p-8 lg:p-10 rounded-2xl sm:rounded-3xl lg:rounded-[40px] border border-slate-100 shadow-sm space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10">
+               <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
+                  <div className="w-10 h-10 sm:w-11 md:w-12 lg:w-12 bg-slate-50 rounded-lg sm:rounded-xl lg:rounded-2xl flex items-center justify-center text-slate-950 border border-slate-200 flex-shrink-0"><CreditCard size={18} className="sm:size-5 md:size-6" /></div>
+                  <Typography variant="h3" className="text-sm sm:text-base md:text-lg lg:text-xl font-bold uppercase tracking-tight">2. Pago</Typography>
                </div>
-               <div className="grid grid-cols-1 gap-4">
-                  {['Tarjeta Corporativa', 'Transferencia PSE', 'Crédito Directo Aliados'].map(method => (
-                    <label key={method} className="flex items-center justify-between p-6 rounded-2xl border border-slate-100 hover:border-blue-600 cursor-pointer group transition-all">
-                       <div className="flex items-center gap-4">
-                          <input type="radio" name="payment" className="w-5 h-5 text-blue-600 border-slate-200 focus:ring-blue-600" />
-                          <Typography variant="body" className="text-sm font-bold text-slate-900">{method}</Typography>
+               <div className="grid grid-cols-1 gap-2 sm:gap-3 md:gap-4">
+                  {['Tarjeta Corporativa', 'Transferencia PSE', 'Crédito Directo'].map(method => (
+                    <label key={method} className="flex items-center justify-between p-3 sm:p-4 md:p-6 rounded-lg sm:rounded-xl lg:rounded-2xl border border-border hover:border-accent cursor-pointer group transition-all">
+                       <div className="flex items-center gap-2 sm:gap-3 md:gap-4 min-w-0">
+                          <input type="radio" name="payment" className="w-4 h-4 sm:w-5 md:w-5 text-accent border-border focus:ring-accent flex-shrink-0" />
+                          <Typography variant="body" className="text-[10px] sm:text-xs md:text-sm font-bold text-foreground">{method}</Typography>
                        </div>
-                       <ChevronRight size={18} className="text-slate-200 group-hover:text-blue-600" />
+                       <ChevronRight size={14} className="text-foreground/20 group-hover:text-accent sm:size-4.5 md:size-5 flex-shrink-0" />
                     </label>
                   ))}
                </div>
@@ -132,7 +132,7 @@ export default function CheckoutPage() {
                   </div>
                </div>
 
-               <Button label="Formalizar Pedido" variant="primary" className="w-full rounded-2xl py-6 bg-blue-600 hover:bg-blue-700 font-black uppercase text-[11px] tracking-widest relative z-10" />
+               <Button label="Formalizar Pedido" variant="primary" className="w-full rounded-2xl py-6 bg-accent hover:bg-accent/80 font-black uppercase text-[11px] tracking-widest relative z-10" />
 
                <div className="flex items-center justify-center gap-2 relative z-10 opacity-40">
                   <ShieldCheck size={14} />
