@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingBag, Star, ArrowLeftRight, Heart } from 'lucide-react';
+import { ShoppingBag, Star, ArrowLeftRight, Heart, XIcon as X } from '@/components/icons';
 import { useCart } from '@/context/CartContext';
 import { useCompare } from '@/context/CompareContext';
 import type { CompareItem } from '@/context/CompareContext';
@@ -42,7 +42,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   sizes,
   productType
 }) => {
-  const { addToCompare, isInCompare } = useCompare();
+  const { addToCompare, isInCompare, removeFromCompare } = useCompare();
   const alreadyInCompare = isInCompare(id);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -67,18 +67,31 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
         {/* Quick Interaction Overlay */}
         <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-500" />
+        {alreadyInCompare && (
+          <button
+            onClick={() => removeFromCompare(id)}
+            className="absolute top-2 right-2 sm:hidden bg-background text-foreground/60 p-1.5 rounded-full shadow-md z-20"
+            aria-label="Eliminar de comparación"
+          >
+            <X size={14} />
+          </button>
+        )}
         
-        <div className="absolute bottom-3 sm:bottom-6 inset-x-3 sm:inset-x-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 flex gap-1 sm:gap-2">
+        <div className="absolute bottom-3 sm:bottom-6 inset-x-3 sm:inset-x-6 translate-y-0 opacity-100 sm:translate-y-4 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 transition-all duration-500 flex gap-1 sm:gap-2">
            <button 
              onClick={() => setIsModalOpen(true)}
              className="flex-1 bg-foreground text-background text-[8px] sm:text-[10px] font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] py-3 sm:py-4 rounded-lg sm:rounded-xl shadow-2xl hover:bg-accent transition-all flex items-center justify-center gap-1 sm:gap-2"
            >
              <ShoppingBag size={12} className="sm:w-4 sm:h-4" /> <span className="hidden sm:inline">Añadir</span>
            </button>
-           <button 
+           <button
              onClick={() => {
                const compareItem: CompareItem = { id, name, price, image, category, slug, vendor: vendor ?? 'Gonzales Market', rating };
-               addToCompare(compareItem);
+               if (alreadyInCompare) {
+                 removeFromCompare(id);
+               } else {
+                 addToCompare(compareItem);
+               }
              }}
              className={`p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-2xl transition-all ${alreadyInCompare ? 'bg-accent text-white' : 'bg-background text-foreground hover:bg-muted'}`}
            >

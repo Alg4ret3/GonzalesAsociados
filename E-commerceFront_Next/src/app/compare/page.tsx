@@ -6,7 +6,7 @@ import { Footer } from '@/components/organisms/Footer';
 import { useCompare } from '@/context/CompareContext';
 import { Typography } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
-import { X, ArrowLeftRight, Check, ChevronRight, ShieldCheck } from 'lucide-react';
+import { XIcon as X, ArrowLeftRight, Check, ChevronRight, ShieldCheck } from '@/components/icons';
 import Image from 'next/image';
 import Link from 'next/link';
 

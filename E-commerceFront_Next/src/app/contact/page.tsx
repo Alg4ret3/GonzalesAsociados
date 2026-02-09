@@ -5,7 +5,7 @@ import { Navbar } from '@/components/organisms/Navbar';
 import { Footer } from '@/components/organisms/Footer';
 import { Typography } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
-import { Mail, Phone, MapPin, MessageSquare, ArrowRight } from 'lucide-react';
+import { Mail, Phone, MapPin, MessageSquare, ArrowRight } from '@/components/icons';
 import { motion } from 'framer-motion';
 
 export default function ContactPage() {

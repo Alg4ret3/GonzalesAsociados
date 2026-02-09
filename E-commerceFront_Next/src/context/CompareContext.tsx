@@ -49,6 +49,11 @@ export const CompareProvider: React.FC<{ children: React.ReactNode }> = ({ child
         alert("Máximo 4 productos para comparar.");
         return prev;
       }
+      // On mobile, ask user if they want to add more comparisons
+      if (typeof window !== 'undefined' && window.innerWidth < 640 && prev.length > 0) {
+        const ok = confirm('¿Quieres comparar más productos?');
+        if (!ok) return prev;
+      }
       return [...prev, item];
     });
   };

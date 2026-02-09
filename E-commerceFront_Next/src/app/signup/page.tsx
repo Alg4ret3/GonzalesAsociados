@@ -6,7 +6,7 @@ import { Footer } from '@/components/organisms/Footer';
 import { Typography } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
 import { useUser } from '@/context/UserContext';
-import { User, Mail, Lock, ArrowRight } from 'lucide-react';
+import { UserIcon as User, Mail, Lock, ArrowRight } from '@/components/icons';
 import Link from 'next/link';
 
 export default function SignupPage() {

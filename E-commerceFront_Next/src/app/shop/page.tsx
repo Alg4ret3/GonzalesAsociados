@@ -6,7 +6,7 @@ import { Footer } from '@/components/organisms/Footer';
 import { Typography } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
 import { ProductCard } from '@/components/molecules/ProductCard';
-import { Search, Filter, X, ChevronRight, SlidersHorizontal, LayoutGrid, List, ArrowRight, Tag, Percent } from 'lucide-react';
+import { SearchIcon as Search, Filter, XIcon as X, ChevronRight, SlidersHorizontal, LayoutGrid, List, ArrowRight, Tag, Percent } from '@/components/icons';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';

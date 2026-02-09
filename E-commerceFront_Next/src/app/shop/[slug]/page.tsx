@@ -7,7 +7,7 @@ import { Typography } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
 import { useCart } from '@/context/CartContext';
 import Image from 'next/image';
-import { ChevronRight, Star, ShoppingBag, ShieldCheck, Truck, RotateCcw } from 'lucide-react';
+import { ChevronRight, Star, ShoppingBag, ShieldCheck, Truck, RotateCcw } from '@/components/icons';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 

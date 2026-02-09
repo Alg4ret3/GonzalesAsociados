@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Plus, Minus } from 'lucide-react';
+import { XIcon as X, Plus, Minus } from '@/components/icons';
 import { Typography } from '@/components/atoms/Typography';
 import { useCart } from '@/context/CartContext';
 

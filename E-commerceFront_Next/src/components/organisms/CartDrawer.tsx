@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Minus, Plus, ShoppingBag, Trash2, Store, ChevronRight } from 'lucide-react';
+import { XIcon as X, Minus, Plus, ShoppingBag, Trash2, Store, ChevronRight } from '@/components/icons';
 import { useCart, CartItem } from '@/context/CartContext';
 import { Typography } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';

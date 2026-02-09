@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ArrowLeftRight, Trash2, ChevronRight } from 'lucide-react';
+import { XIcon as X, ArrowLeftRight, Trash2, ChevronRight } from '@/components/icons';
 import { useCompare } from '@/context/CompareContext';
 import { Typography } from '@/components/atoms/Typography';
 import Image from 'next/image';
@@ -37,11 +37,11 @@ export const CompareDrawer: React.FC = () => {
           {compareItems.map(item => (
             <div key={item.id} className="relative w-10 h-10 sm:w-12 md:w-14 sm:h-12 md:h-14 flex-shrink-0 bg-muted rounded-lg border border-border group">
                <Image src={item.image} alt={item.name} fill className="object-cover rounded-lg" />
-               <button 
+               <button
                  onClick={() => removeFromCompare(item.id)}
-                 className="absolute -top-1 sm:-top-1.5 md:-top-2 -right-1 sm:-right-1.5 md:-right-2 bg-background text-foreground/40 hover:text-accent shadow-sm border border-border rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+                 className="absolute -top-1 sm:-top-1.5 md:-top-2 -right-1 sm:-right-1.5 md:-right-2 bg-background text-foreground/40 hover:text-accent shadow-sm border border-border rounded-full p-0.5 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
                >
-                 <X size={8} className="sm:size-2.5 md:size-3" />
+                 <X size={10} className="sm:size-2.5 md:size-3" />
                </button>
             </div>
           ))}

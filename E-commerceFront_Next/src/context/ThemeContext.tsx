@@ -3,53 +3,32 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 interface ThemeContextType {
-  theme: 'light' | 'dark';
+  theme: 'light';
   toggleTheme: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const applyTheme = (t: 'light' | 'dark') => {
-    if (t === 'dark') {
-      document.documentElement.classList.add('dark');
-      document.documentElement.style.colorScheme = 'dark';
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.style.colorScheme = 'light';
-    }
+  const [theme] = useState<'light'>('light');
+  const applyTheme = () => {
+    document.documentElement.classList.remove('dark');
+    document.documentElement.style.colorScheme = 'light';
   };
 
   useEffect(() => {
-    // Determine initial theme: localStorage -> prefers-color-scheme -> default light
+    // Force light mode only
     try {
-      const stored = localStorage.getItem('gonzales-theme') as 'light' | 'dark' | null;
-      if (stored === 'light' || stored === 'dark') {
-        setTheme(stored);
-        applyTheme(stored);
-        return;
-      }
-
-      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const initial = prefersDark ? 'dark' : 'light';
-      setTheme(initial);
-      applyTheme(initial);
+      applyTheme();
+      try { localStorage.setItem('gonzales-theme', 'light'); } catch (e) {}
     } catch (e) {
-      // Fallback: light
-      setTheme('light');
-      applyTheme('light');
+      // noop
     }
   }, []);
 
-
   const toggleTheme = () => {
-    const next = theme === 'dark' ? 'light' : 'dark';
-    setTheme(next);
-    try {
-      localStorage.setItem('gonzales-theme', next);
-    } catch (e) {}
-    applyTheme(next);
+    // No-op: keep site always in light mode
+    applyTheme();
   };
 
   return (

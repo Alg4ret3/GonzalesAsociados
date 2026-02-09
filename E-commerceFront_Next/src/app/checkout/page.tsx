@@ -6,7 +6,7 @@ import { Footer } from '@/components/organisms/Footer';
 import { useCart } from '@/context/CartContext';
 import { Typography } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
-import { ShieldCheck, Lock, Truck, CreditCard, ChevronRight, Building2 } from 'lucide-react';
+import { ShieldCheck, Lock, Truck, CreditCard, ChevronRight, Building2 } from '@/components/icons';
 import Image from 'next/image';
 
 export default function CheckoutPage() {

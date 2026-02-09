@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Typography } from '@/components/atoms/Typography';
-import { Instagram, Facebook, Twitter, Mail, MapPin, Phone } from 'lucide-react';
+import { Instagram, Facebook, Twitter, Mail, MapPin, Phone } from '@/components/icons';
 
 export const Footer: React.FC = () => {
   return (

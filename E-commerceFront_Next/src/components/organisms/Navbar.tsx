@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ShoppingBag, User, Search, Menu, X, ArrowLeftRight, Store, ChevronDown, ChevronRight, Sparkles, Tag, Building2, Sun, Moon } from 'lucide-react';
+import { ShoppingBag, UserIcon as User, SearchIcon as Search, MenuIcon as Menu, XIcon as X, ArrowLeftRight, Store, ChevronDown, ChevronRight, Sparkles, Tag, Building2, Sun, Moon } from '@/components/icons';
 import { useTheme } from '@/context/ThemeContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '@/context/CartContext';
@@ -173,7 +173,7 @@ export const Navbar: React.FC = () => {
               <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/40" />
            </div>
 
-           <Link href="/compare" className="nav-icon-btn relative">
+            <Link href="/compare" className="nav-icon-btn relative order-first sm:order-none">
               <ArrowLeftRight size={18} strokeWidth={1.5} />
               {compareItems.length > 0 && (
                 <span className="absolute -top-1 -right-1 bg-accent text-[8px] w-4 h-4 flex items-center justify-center text-white font-bold rounded-full">{compareItems.length}</span>
@@ -184,7 +184,7 @@ export const Navbar: React.FC = () => {
               <User size={18} strokeWidth={1.5} />
            </Link>
 
-           <button onClick={() => setIsCartOpen(true)} className="nav-icon-btn relative">
+           <button onClick={() => setIsCartOpen(true)} className="nav-icon-btn relative order-first sm:order-none">
               <ShoppingBag size={18} strokeWidth={1.5} />
               {totalItems > 0 && (
                 <span className="absolute -top-1 -right-1 bg-primary text-[8px] w-4 h-4 flex items-center justify-center text-white font-bold rounded-full">{totalItems}</span>
@@ -195,15 +195,7 @@ export const Navbar: React.FC = () => {
               <Menu size={20} />
            </button>
           
-           {/* Theme toggle */}
-           <button
-             onClick={toggleTheme}
-             aria-pressed={theme === 'dark'}
-             title={theme === 'dark' ? 'Modo oscuro' : 'Modo claro'}
-             className="p-2 hover:bg-muted rounded-xl transition-colors"
-           >
-             {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-           </button>
+           {/* Theme toggle removed (forced light mode) */}
         </div>
       </div>
 

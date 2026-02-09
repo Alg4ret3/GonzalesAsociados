@@ -9,7 +9,7 @@ import { ProductCard } from '@/components/molecules/ProductCard';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, ShieldCheck, Trophy, Target, TrendingUp, Globe, Briefcase, ChevronRight } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Trophy, Target, TrendingUp, Globe, Briefcase, ChevronRight } from '@/components/icons';
 
 const FEATURED_VENDORS = [
   {
