@@ -14,9 +14,9 @@ export const Typography: React.FC<TypographyProps> = ({
   as,
 }) => {
   const variants = {
-    h1: 'text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-medium tracking-tight',
-    h2: 'text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-medium tracking-tight',
-    h3: 'text-lg sm:text-xl md:text-2xl font-serif font-medium tracking-tight',
+    h1: 'text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-sans font-black tracking-tighter',
+    h2: 'text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-sans font-black tracking-tighter',
+    h3: 'text-lg sm:text-xl md:text-2xl font-sans font-bold tracking-tight',
     h4: 'text-sm sm:text-base font-sans font-semibold tracking-wider uppercase',
     body: 'text-sm sm:text-base font-sans font-light leading-relaxed',
     small: 'text-[9px] sm:text-[10px] md:text-xs font-sans font-medium tracking-[0.3em] uppercase',

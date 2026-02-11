@@ -1,9 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 
 interface ButtonProps {
-  label: string;
+  label?: string;
+  children?: React.ReactNode;
   href?: string;
   onClick?: () => void;
   variant?: 'primary' | 'outline' | 'ghost';
@@ -12,6 +12,7 @@ interface ButtonProps {
 
 export const Button: React.FC<ButtonProps> = ({
   label,
+  children,
   href,
   onClick,
   variant = 'primary',
@@ -27,7 +28,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   const content = (
     <>
-      <span className="relative z-10">{label}</span>
+      <span className="relative z-10">{label || children}</span>
       {variant === 'primary' && (
         <div className="absolute inset-0 bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
       )}

@@ -9,7 +9,7 @@ import { ProductCard } from '@/components/molecules/ProductCard';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, ShieldCheck, Trophy, Target, TrendingUp, Globe, Briefcase, ChevronRight } from '@/components/icons';
+import { ArrowRight, ChevronRight } from '@/components/icons';
 
 const FEATURED_VENDORS = [
   {
@@ -30,12 +30,6 @@ const FEATURED_VENDORS = [
   }
 ];
 
-const CORPORATE_STATS = [
-  { label: "Transacciones Seguras", value: "100%", icon: ShieldCheck },
-  { label: "Aliados Industriales", value: "85+", icon: Briefcase },
-  { label: "Alcance Global", value: "24", icon: Globe },
-  { label: "Crecimiento Anual", value: "+12%", icon: TrendingUp }
-];
 
 const RECENT_REFERENCES = [
   {
@@ -157,25 +151,10 @@ export default function Home() {
         {/* Decorative Elements */}
         <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full blur-3xl opacity-5 bg-accent z-0" />
 
-        <div className="max-w-[1400px] mx-auto relative z-10 w-full px-4 sm:px-8 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
+        <div className="max-w-[1400px] mx-auto relative z-10 w-full px-4 sm:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="space-y-8">
-              {/* New Collection Badge */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="inline-flex items-center gap-3 bg-red-500/90 backdrop-blur px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-red-400/50 shadow-lg"
-              >
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-                </span>
-                <Typography variant="small" className="text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-white">
-                  Nueva Colección Esperada
-                </Typography>
-              </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -183,7 +162,7 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
                 <Typography variant="h1" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] md:leading-[1.15] text-white tracking-tighter">
-                  Próximamente: Nueva Colección
+                  Moda de Autor & <br className="hidden md:block" /> Alta Manufactura
                 </Typography>
               </motion.div>
 
@@ -197,38 +176,6 @@ export default function Home() {
                 </Typography>
               </motion.div>
 
-              {/* Stats Row */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="grid grid-cols-3 gap-4 pt-4 md:pt-8"
-              >
-                <div className="flex flex-col gap-1">
-                  <Typography variant="h3" className="text-2xl sm:text-3xl md:text-3xl font-black text-white">
-                    Feb 14
-                  </Typography>
-                  <Typography variant="small" className="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-white/70">
-                    Fecha Lanzamiento
-                  </Typography>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <Typography variant="h3" className="text-2xl sm:text-3xl md:text-3xl font-black text-white">
-                    250+
-                  </Typography>
-                  <Typography variant="small" className="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-white/70">
-                    Nuevas Piezas
-                  </Typography>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <Typography variant="h3" className="text-2xl sm:text-3xl md:text-3xl font-black text-white">
-                    Limited
-                  </Typography>
-                  <Typography variant="small" className="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-white/70">
-                    Edición
-                  </Typography>
-                </div>
-              </motion.div>
 
               {/* CTA Buttons */}
               <motion.div
@@ -338,9 +285,9 @@ export default function Home() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
           >
-            {RECENT_REFERENCES.map((ref, idx) => (
+            {RECENT_REFERENCES.map((ref) => (
               <ProductCard key={ref.id} {...ref} />
             ))}
           </motion.div>
@@ -382,7 +329,7 @@ export default function Home() {
            </Typography>
         </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
            {FEATURED_VENDORS.map((vendor) => (
             <div key={vendor.name} className="group relative bg-muted rounded-2xl p-6 flex flex-col sm:flex-row gap-6 hover:bg-background hover:shadow-lg transition-all border border-transparent hover:border-border overflow-hidden">
               <div className="relative w-full sm:w-44 aspect-square flex-shrink-0 rounded-xl overflow-hidden border border-border">
@@ -411,143 +358,6 @@ export default function Home() {
           </div>
       </section>
 
-      {/* New Collections Video Banner */}
-      <section className="relative w-full h-screen min-h-[600px] sm:min-h-[700px] md:min-h-screen overflow-hidden flex items-center justify-center">
-        {/* Video Background */}
-        <div className="absolute inset-0 w-full h-full">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-            poster="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=2000&auto=format&fit=crop"
-          >
-            <source src="https://videos.pexels.com/video-files/3394650/3394650-hd_1920_1080_30fps.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/60 to-foreground/40" />
-        </div>
-
-        {/* Content Overlay */}
-        <div className="relative z-10 max-w-[1400px] mx-auto w-full px-4 sm:px-8 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
-            {/* Left Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="space-y-6 sm:space-y-8"
-            >
-              <div className="space-y-3 sm:space-y-4">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  className="inline-flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full border border-white/20"
-                >
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-white">✨ Colecciones 2026</span>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                  <Typography variant="h1" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] text-white tracking-tighter">
-                    Descubre Nuestras Nuevas Colecciones
-                  </Typography>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                >
-                  <Typography variant="body" className="text-base sm:text-lg md:text-xl text-white/90 max-w-xl leading-relaxed font-light">
-                    Diseños de vanguardia, materiales premium y sostenibilidad. Cada pieza cuenta una historia de craftsmanship profesional.
-                  </Typography>
-                </motion.div>
-              </div>
-
-              {/* CTA Buttons */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="flex flex-col sm:flex-row gap-4 pt-4 sm:pt-6"
-              >
-                <Link
-                  href="/shop"
-                  className="inline-flex items-center justify-center px-6 sm:px-8 py-4 sm:py-5 bg-white text-foreground font-bold text-[11px] sm:text-[12px] uppercase tracking-wider rounded-xl hover:bg-accent hover:text-white transition-all duration-300 shadow-2xl"
-                >
-                  Explorar Colecciones <ArrowRight size={16} className="ml-2" />
-                </Link>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center px-6 sm:px-8 py-4 sm:py-5 bg-white/10 backdrop-blur text-white font-bold text-[11px] sm:text-[12px] uppercase tracking-wider rounded-xl border-2 border-white/30 hover:bg-white/20 transition-all duration-300"
-                >
-                  Consultar Catálogo
-                </Link>
-              </motion.div>
-
-              {/* Stats Under CTA */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="flex gap-8 sm:gap-12 pt-4 sm:pt-8"
-              >
-                <div>
-                  <Typography variant="h3" className="text-2xl sm:text-3xl font-black text-white">
-                    250+
-                  </Typography>
-                  <Typography variant="small" className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-white/70 mt-1">
-                    Nuevas Piezas
-                  </Typography>
-                </div>
-                <div>
-                  <Typography variant="h3" className="text-2xl sm:text-3xl font-black text-white">
-                    12
-                  </Typography>
-                  <Typography variant="small" className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-white/70 mt-1">
-                    Diseñadores
-                  </Typography>
-                </div>
-              </motion.div>
-            </motion.div>
-
-            {/* Right QR / Highlight */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="hidden lg:flex items-center justify-center"
-            >
-              <div className="space-y-6">
-                <div className="bg-white/10 backdrop-blur rounded-3xl p-8 border border-white/20">
-                  <div className="w-40 h-40 bg-white/20 rounded-2xl flex items-center justify-center">
-                    <div className="text-center">
-                      <Typography variant="small" className="text-white font-bold text-[11px] uppercase tracking-widest mb-3 block">
-                        Código QR
-                      </Typography>
-                      <div className="w-32 h-32 bg-white rounded-lg flex items-center justify-center">
-                        <Typography variant="body" className="text-[10px] text-foreground font-bold uppercase">
-                          Catálogo Digital
-                        </Typography>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-white/10 backdrop-blur rounded-2xl p-6 border border-white/20 text-center">
-                  <Typography variant="small" className="text-white/90 text-[11px] font-medium">
-                    Escanea para ver nuestro catálogo interactivo en 3D
-                  </Typography>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
       <Footer />
     </main>

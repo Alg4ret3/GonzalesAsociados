@@ -14,7 +14,7 @@ export default function CheckoutPage() {
 
   // Group items by vendor for corporate multi-vendor structure
   const itemsByVendor = (cart || []).reduce((acc, item) => {
-    const vendor = item.vendor || 'Gonzales Market';
+    const vendor = item.vendor || 'Gonzales & CIA SAS';
     if (!acc[vendor]) acc[vendor] = [];
     acc[vendor].push(item);
     return acc;

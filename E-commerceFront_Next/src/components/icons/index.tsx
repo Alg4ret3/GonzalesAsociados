@@ -23,6 +23,7 @@ export {
   Mail,
   MapPin,
   Phone,
+  MessageCircle as WhatsApp,
   Trash2,
   Minus,
   Plus,

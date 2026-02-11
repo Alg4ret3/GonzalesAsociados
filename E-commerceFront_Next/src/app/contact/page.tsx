@@ -32,7 +32,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <Typography variant="small" className="text-neutral-400 block mb-1">Escríbenos</Typography>
-                  <Typography variant="h4" className="text-sm font-medium">hola@gonzalesasociados.com</Typography>
+                  <Typography variant="h4" className="text-sm font-medium">hola@gonzales.com</Typography>
                 </div>
               </div>
 

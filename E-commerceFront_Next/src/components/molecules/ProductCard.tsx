@@ -1,9 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingBag, Star, ArrowLeftRight, Heart, XIcon as X } from '@/components/icons';
-import { useCart } from '@/context/CartContext';
+import { ShoppingBag, Star, ArrowLeftRight, XIcon as X } from '@/components/icons';
 import { useCompare } from '@/context/CompareContext';
 import type { CompareItem } from '@/context/CompareContext';
 import { Typography } from '@/components/atoms/Typography';
@@ -34,13 +32,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   image,
   category,
   slug,
-  vendor = "Gonzales Market",
+  vendor = "Gonzales & CIA SAS",
   rating = 4.8,
   isWholesale = false,
   color,
   colors,
-  sizes,
-  productType
+  sizes
 }) => {
   const { addToCompare, isInCompare, removeFromCompare } = useCompare();
   const alreadyInCompare = isInCompare(id);
@@ -60,9 +57,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         {/* Quality/Type Badge */}
         <div className="absolute top-2 sm:top-4 left-2 sm:left-4 flex flex-col gap-1 sm:gap-2">
            {isWholesale && (
-             <span className="bg-primary text-white text-[7px] sm:text-[9px] font-bold px-2 sm:px-3 py-0.5 sm:py-1 rounded-full uppercase tracking-widest shadow-lg">Mayorista</span>
+             <span className="bg-slate-950 text-white text-[7px] sm:text-[9px] font-bold px-2 sm:px-3 py-0.5 sm:py-1 rounded-full uppercase tracking-widest shadow-lg">Mayorista</span>
            )}
-           <span className="bg-background/90 backdrop-blur text-foreground text-[7px] sm:text-[9px] font-bold px-2 sm:px-3 py-0.5 sm:py-1 rounded-full uppercase tracking-widest shadow-sm border border-border">{category}</span>
+           <span className="bg-white/90 backdrop-blur text-slate-950 text-[7px] sm:text-[9px] font-bold px-2 sm:px-3 py-0.5 sm:py-1 rounded-full uppercase tracking-widest shadow-sm border border-slate-100">{category}</span>
         </div>
 
         {/* Quick Interaction Overlay */}
@@ -86,7 +83,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
            </button>
            <button
              onClick={() => {
-               const compareItem: CompareItem = { id, name, price, image, category, slug, vendor: vendor ?? 'Gonzales Market', rating };
+               const compareItem: CompareItem = { id, name, price, image, category, slug, vendor: vendor ?? 'Gonzales & CIA SAS', rating };
                if (alreadyInCompare) {
                  removeFromCompare(id);
                } else {

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit, Playfair_Display } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { CartProvider } from "@/context/CartContext";
@@ -10,18 +10,12 @@ import { CompareDrawer } from "@/components/organisms/CompareDrawer";
 const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-sans",
-  weight: ["300", "400", "500", "600", "700"],
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-serif",
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
-  title: "GonzalesAsociados | Alta Costura & Elegancia",
-  description: "Descubre la exclusividad en moda contemporánea. GonzalesAsociados redefine la elegancia con colecciones de lujo y diseño de vanguardia.",
+  title: "Gonzales & CIA | Tienda de Ropa Online",
+  description: "Explora la mejor selección de moda y alta costura en nuestra tienda de ropa online. Gonzales & CIA ofrece colecciones exclusivas de marcas asociadas y diseños de vanguardia para cada ocasión.",
 };
 
 export default function RootLayout({
@@ -31,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className={`${outfit.variable} ${playfair.variable} antialiased font-sans`}>
+      <body className={`${outfit.variable} antialiased font-sans`}>
         <ThemeProvider>
           <AuthProvider>
             <CartProvider>

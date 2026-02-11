@@ -21,7 +21,7 @@ export default function NosotrosPage() {
           className="max-w-3xl mx-auto space-y-8"
         >
           <Typography variant="small" className="text-primary font-bold">Nuestra Historia</Typography>
-          <Typography variant="h1" className="text-5xl sm:text-7xl">GonzalesAsociados</Typography>
+          <Typography variant="h1" className="text-5xl sm:text-7xl">Gonzales <span className="text-accent font-light">& CIA SAS</span></Typography>
           <Typography variant="body" className="text-lg font-light text-secondary leading-relaxed">
             Nacidos en el corazón de Nariño, somos una casa de moda dedicada a la preservación de la elegancia atemporal y la excelencia artesanal.
           </Typography>
@@ -53,7 +53,7 @@ export default function NosotrosPage() {
           <div className="flex flex-col justify-center p-12 sm:p-24 lg:p-32 space-y-8 lg:order-1 order-2">
             <Typography variant="h2" className="text-4xl">Sostenibilidad Ética</Typography>
             <Typography variant="body" className="text-secondary leading-relaxed font-light">
-              Nuestra responsabilidad va más allá del estilo. Seleccionamos materiales de fuentes certificadas y promovemos un comercio justo que empodera a nuestras comunidades. En GonzalesAsociados, el lujo solo es real si es respetuoso con el entorno y con las personas que lo hacen posible.
+              Nuestra responsabilidad va más allá del estilo. Seleccionamos materiales de fuentes certificadas y promovemos un comercio justo que empodera a nuestras comunidades. En Gonzales & CIA SAS, el lujo solo es real si es respetuoso con el entorno y con las personas que lo hacen posible.
             </Typography>
           </div>
           <div className="relative aspect-square lg:aspect-auto lg:order-2 order-1">

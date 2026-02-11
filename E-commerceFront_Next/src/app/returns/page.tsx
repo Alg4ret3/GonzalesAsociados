@@ -19,7 +19,7 @@ export default function ReturnsPage() {
         },
         {
           title: "3. Proceso de Cambio",
-          content: "Para iniciar un proceso de cambio, debe contactar a nuestro equipo de soporte a través de hola@gonzalesasociados.com indicando su número de pedido y el motivo del cambio. Nosotros le proporcionaremos las instrucciones para el envío."
+          content: "Para iniciar un proceso de cambio, debe contactar a nuestro equipo de soporte a través de hola@gonzales.com indicando su número de pedido y el motivo del cambio. Nosotros le proporcionaremos las instrucciones para el envío."
         }
       ]}
     />

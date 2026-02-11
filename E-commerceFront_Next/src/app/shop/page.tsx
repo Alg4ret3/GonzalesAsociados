@@ -6,7 +6,7 @@ import { Footer } from '@/components/organisms/Footer';
 import { Typography } from '@/components/atoms/Typography';
 import { Button } from '@/components/atoms/Button';
 import { ProductCard } from '@/components/molecules/ProductCard';
-import { SearchIcon as Search, Filter, XIcon as X, ChevronRight, SlidersHorizontal, LayoutGrid, List, ArrowRight, Tag, Percent } from '@/components/icons';
+import { XIcon as X, ChevronRight, SlidersHorizontal, LayoutGrid, List } from '@/components/icons';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -104,11 +104,24 @@ const PRODUCTS = [
     color: "Gris",
     sizes: ["34", "36", "38", "40", "42", "44"],
     productType: "Pantalones"
-  }
-];
+  },
+  {
+    id: "g1",
+      name: "Blazer Imperial Gonzales",
+      price: 580000,
+      image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=1000&auto=format&fit=crop",
+      category: "Sastrería",
+      slug: "blazer-imperial-gonzales",
+      vendor: "Gonzales & CIA SAS",
+      rating: 5.0,
+      color: "Negro",
+      sizes: ["36", "38", "40", "42"],
+      productType: "Blazers"
+    }
+  ];
 
 const CATEGORIES = ["Todos", "Activewear", "Trends", "Alta Costura", "Gala", "Verano", "Sastrería", "Accesorios"];
-const VENDORS = ["Babalu.co", "Inexmoda", "Atelier Paris", "Luxe Couture", "Nativa Design"];
+const VENDORS = ["Gonzales & CIA SAS", "Babalu.co", "Inexmoda", "Atelier Paris", "Luxe Couture", "Nativa Design"];
 const COLORS = ["Negro", "Blanco", "Gris", "Beige", "Azul", "Rojo", "Multicolor"];
 const SIZES = ["XS", "S", "M", "L", "XL", "34", "36", "38", "40", "42", "44"];
 const PRODUCT_TYPES = ["Pantalones", "Vestidos", "Blazers", "Abrigos", "Conjuntos", "Libros", "Accesorios"];
@@ -122,6 +135,8 @@ interface FiltersContentProps {
   setSelectedSize: (size: string) => void;
   selectedType: string;
   setSelectedType: (type: string) => void;
+  selectedVendor: string;
+  setSelectedVendor: (vendor: string) => void;
   priceRange: [number, number];
   setPriceRange: (range: [number, number]) => void;
   onFilterApplied?: () => void;
@@ -132,30 +147,51 @@ const FiltersContent: React.FC<FiltersContentProps> = ({
   selectedColor, setSelectedColor,
   selectedSize, setSelectedSize,
   selectedType, setSelectedType,
+  selectedVendor, setSelectedVendor,
   priceRange, setPriceRange,
   onFilterApplied 
 }) => (
   <div className="space-y-10 group">
-    <div className="flex items-center justify-between">
-       <Typography variant="h4" className="text-sm font-extrabold flex items-center gap-2">
-         <SlidersHorizontal size={16} /> Filtros
-       </Typography>
-       <button 
-         onClick={() => { 
-           setSelectedCategory('Todos');
-           setSelectedColor('Todos');
-           setSelectedSize('Todos');
-           setSelectedType('Todos');
-           setPriceRange([0, 2000000]);
-         }} 
-         className="text-[10px] text-accent font-bold uppercase hover:underline"
-       >
-         Limpiar
-       </button>
+     <div className="flex items-center justify-between">
+        <Typography variant="h4" className="text-sm font-extrabold flex items-center gap-2">
+          <SlidersHorizontal size={16} /> Filtros de Búsqueda
+        </Typography>
+        <button 
+          onClick={() => { 
+            setSelectedCategory('Todos');
+            setSelectedColor('Todos');
+            setSelectedSize('Todos');
+            setSelectedType('Todos');
+            setSelectedVendor('Todas');
+            setPriceRange([0, 2000000]);
+          }} 
+          className="text-[10px] text-accent font-bold uppercase hover:underline"
+        >
+          Limpiar
+        </button>
+     </div>
+
+    {/* Marcas Aliadas (Directorio) */}
+    <div className="space-y-6">
+      <Typography variant="small" className="text-[10px] font-bold text-foreground uppercase tracking-[0.2em]">Nuestras Marcas Aliadas</Typography>
+      <div className="flex flex-col gap-3">
+        {["Todas", ...VENDORS].map(vendor => (
+          <button 
+            key={vendor} 
+            onClick={() => { setSelectedVendor(vendor); onFilterApplied?.(); }}
+            className={`text-sm flex justify-between items-center transition-colors py-1 ${
+              selectedVendor === vendor ? 'text-accent font-extrabold' : 'text-foreground/50 hover:text-foreground'
+            }`}
+          >
+            {vendor}
+            <ChevronRight size={12} className={selectedVendor === vendor ? 'opacity-100' : 'opacity-0'} />
+          </button>
+        ))}
+      </div>
     </div>
 
     {/* Tipos de Producto */}
-    <div className="space-y-6">
+    <div className="space-y-6 pt-6 border-t border-border">
       <Typography variant="small" className="text-[10px] font-bold text-foreground uppercase tracking-[0.2em]">Tipo de Producto</Typography>
       <div className="flex flex-col gap-3">
         {["Todos", ...PRODUCT_TYPES].map(type => (
@@ -265,6 +301,7 @@ function ShopContent() {
   const [selectedColor, setSelectedColor] = useState("Todos");
   const [selectedSize, setSelectedSize] = useState("Todos");
   const [selectedType, setSelectedType] = useState("Todos");
+  const [selectedVendor, setSelectedVendor] = useState(vendorParam || "Todas");
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 2000000]);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
@@ -287,7 +324,8 @@ function ShopContent() {
     if (p.price < priceRange[0] || p.price > priceRange[1]) return false;
     
     // Vendor Filter
-    if (vendorParam && p.vendor !== vendorParam) return false;
+    if (selectedVendor !== "Todas" && p.vendor !== selectedVendor) return false;
+    if (vendorParam && p.vendor !== vendorParam && selectedVendor === "Todas") return false;
 
     // Filter Badges
     if (filterParam === 'wholesale' && !p.isWholesale) return false;
@@ -299,12 +337,12 @@ function ShopContent() {
     <main className="min-h-screen bg-background font-sans selection:bg-accent/20">
       <Navbar />
       
-      <div className="pt-16 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-24 px-3 sm:px-6 md:px-12 max-w-[1400px] mx-auto">
-        <header className="mb-6 sm:mb-8 md:mb-12 space-y-2 sm:space-y-3 md:space-y-4">
+      <div className="pt-24 sm:pt-32 md:pt-40 pb-12 sm:pb-16 md:pb-24 px-3 sm:px-6 md:px-12 max-w-[1400px] mx-auto">
+        <header className="mb-8 sm:mb-12 md:mb-16 space-y-4 sm:space-y-6">
           <nav className="flex items-center gap-1.5 sm:gap-2 text-[8px] sm:text-[9px] md:text-[10px] tracking-widest uppercase text-foreground/40 font-bold">
             <Link href="/" className="hover:text-accent transition-colors">Inicio</Link>
             <ChevronRight size={8} className="sm:size-2.5 md:size-3" />
-            <span className="text-foreground">Catálogo</span>
+            <span className="text-foreground">Catálogo General</span>
             {(vendorParam || filterParam) && (
               <>
                 <ChevronRight size={8} className="sm:size-2.5 md:size-3" />
@@ -315,7 +353,7 @@ function ShopContent() {
           
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 sm:gap-4 md:gap-6 border-b border-border pb-6 sm:pb-8 md:pb-10">
             <div className="space-y-1 sm:space-y-1.5 md:space-y-2">
-               <Typography variant="h2" className="text-2xl sm:text-3xl md:text-4xl font-black text-foreground tracking-tighter">Explorar</Typography>
+               <Typography variant="h2" className="text-foreground">Explorar</Typography>
                <Typography variant="body" className="text-[10px] sm:text-xs md:text-sm text-foreground/60 font-light">Colecciones de autor y referencias.</Typography>
             </div>
             <Typography variant="body" className="text-[8px] sm:text-[9px] md:text-[10px] font-bold text-foreground/40 uppercase tracking-widest whitespace-nowrap">{filteredProducts.length} Referencias</Typography>
@@ -323,7 +361,7 @@ function ShopContent() {
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
-          {/* Filters Sidebar - Desktop */}
+          {/* Filters Sidebar - Desktop (Hidden until lg) */}
           <aside className="hidden lg:block lg:col-span-3">
              <div className="bg-background p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl md:rounded-[32px] border border-border shadow-sm sticky top-24 sm:top-32 md:top-48">
                 <FiltersContent 
@@ -335,6 +373,8 @@ function ShopContent() {
                   setSelectedSize={setSelectedSize}
                   selectedType={selectedType}
                   setSelectedType={setSelectedType}
+                  selectedVendor={selectedVendor}
+                  setSelectedVendor={setSelectedVendor}
                   priceRange={priceRange}
                   setPriceRange={setPriceRange}
                 />
@@ -377,8 +417,8 @@ function ShopContent() {
                </div>
             </div>
 
-            {/* Product Grid */}
-            <div className={`grid gap-3 sm:gap-4 md:gap-6 lg:gap-8 ${viewMode === 'grid' ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-3' : 'grid-cols-1'}`}>
+            {/* Product Grid - 2 columns until lg */}
+            <div className={`grid gap-3 sm:gap-4 md:gap-6 ${viewMode === 'grid' ? 'grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
               {filteredProducts.map((product) => (
                 <ProductCard key={product.id} {...product} />
               ))}
@@ -428,6 +468,8 @@ function ShopContent() {
                     setSelectedSize={setSelectedSize}
                     selectedType={selectedType}
                     setSelectedType={setSelectedType}
+                    selectedVendor={selectedVendor}
+                    setSelectedVendor={setSelectedVendor}
                     priceRange={priceRange}
                     setPriceRange={setPriceRange}
                     onFilterApplied={() => setIsFilterDrawerOpen(false)}

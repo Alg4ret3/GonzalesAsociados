@@ -7,15 +7,15 @@ const medusa = new Medusa({
 });
 
 async function testConnection() {
-  console.log("🔍 Probando conexión con Medusa backend...\n");
+  console.log("Probando conexion con Medusa backend...\n");
   
   try {
     const { products } = await medusa.store.product.list({
       limit: 5,
     });
     
-    console.log("✅ Conexión exitosa!");
-    console.log(`📦 Productos encontrados: ${products.length}\n`);
+    console.log("Conexion exitosa!");
+    console.log(`Productos encontrados: ${products.length}\n`);
     
     if (products.length > 0) {
       console.log("Primeros productos:");
