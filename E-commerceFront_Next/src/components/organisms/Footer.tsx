@@ -13,7 +13,7 @@ export const Footer: React.FC = () => {
         <div className="flex flex-col gap-4 sm:gap-8 col-span-2 sm:col-span-1">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8">
-              <img src="/assets/Logo.svg" alt="Gonzales & CIA SAS" className="w-full h-full object-contain" />
+              <img src="/assets/logo.svg" alt="Gonzales & CIA SAS" className="w-full h-full object-contain" />
             </div>
             <Typography variant="h4" className="text-base sm:text-lg md:text-xl text-primary font-black">
               Gonzales <span className="text-accent font-black">&</span> CIA <span className="text-foreground">SAS</span>

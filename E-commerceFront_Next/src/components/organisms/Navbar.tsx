@@ -71,7 +71,7 @@ export const Navbar: React.FC = () => {
         {/* Logo */}
         <Link href="/" className="shrink-0 flex items-center gap-2 sm:gap-3">
            <div className="w-7 sm:w-9 h-7 sm:h-9 shrink-0">
-             <img src="/assets/Logo.svg" alt="Gonzales & CIA SAS" className="w-full h-full object-contain" />
+             <img src="/assets/logo.svg" alt="Gonzales & CIA SAS" className="w-full h-full object-contain" />
            </div>
            <Typography variant="h4" className="text-xs sm:text-sm md:text-base text-foreground font-black tracking-tight uppercase whitespace-nowrap">
              Gonzales <span className="text-accent font-black">&</span> CIA <span className="text-foreground">SAS</span>
@@ -226,7 +226,7 @@ export const Navbar: React.FC = () => {
                <div className="flex justify-between items-center mb-8">
                   <div className="flex items-center gap-2">
                     <div className="w-7 h-7">
-                      <img src="/assets/Logo.svg" alt="Gonzales & CIA SAS" className="w-full h-full object-contain" />
+                      <img src="/assets/logo.svg" alt="Gonzales & CIA SAS" className="w-full h-full object-contain" />
                     </div>
                     <Typography variant="h4" className="text-lg font-black text-foreground uppercase">
                       Gonzales <span className="text-accent">&</span> CIA
